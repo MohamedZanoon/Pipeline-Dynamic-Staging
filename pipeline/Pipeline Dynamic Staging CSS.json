@@ -58,7 +58,7 @@
 							"type": "Copy",
 							"dependsOn": [
 								{
-									"activity": "If Is Staging File Exists",
+									"activity": "If Is Staging File not Exists",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -141,7 +141,7 @@
 								"storedProcedureParameters": {
 									"DurationFirstCopy": {
 										"value": {
-											"value": "@if(equals(item().IsStagingFileExists,1),0,activity('Oracle Source to Staging File').output.copyDuration)",
+											"value": "@if(equals(item().IsStagingFileExists,1),0,variables('SourceCopyDuration'))",
 											"type": "Expression"
 										},
 										"type": "Int32"
@@ -605,7 +605,7 @@
 							}
 						},
 						{
-							"name": "If Is Staging File Exists",
+							"name": "If Is Staging File not Exists",
 							"type": "IfCondition",
 							"dependsOn": [
 								{
@@ -851,6 +851,26 @@
 										"linkedServiceName": {
 											"referenceName": "EWA_Staging",
 											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "Source Copy Duration",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Add Log Staging File Created",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "SourceCopyDuration",
+											"value": {
+												"value": "@activity('Oracle Source to Staging File').output.copyDuration",
+												"type": "Expression"
+											}
 										}
 									}
 								]
@@ -1165,6 +1185,10 @@
 		"variables": {
 			"SourceQuery": {
 				"type": "String"
+			},
+			"SourceCopyDuration": {
+				"type": "String",
+				"defaultValue": "0"
 			}
 		},
 		"annotations": []
