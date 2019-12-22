@@ -1,0 +1,268 @@
+{
+	"name": "Staging",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Staging Account",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FileNameStaging": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "02 - Staging"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat(dataset().FileNameStaging,'.csv')",
+					"type": "Expression"
+				},
+				"container": "adf-staging"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "USUARIO",
+				"type": "String"
+			},
+			{
+				"name": "F_ACTUAL",
+				"type": "String"
+			},
+			{
+				"name": "PROGRAMA",
+				"type": "String"
+			},
+			{
+				"name": "COD_CLI",
+				"type": "String"
+			},
+			{
+				"name": "APE1_CLI",
+				"type": "String"
+			},
+			{
+				"name": "APE2_CLI",
+				"type": "String"
+			},
+			{
+				"name": "NOM_CLI",
+				"type": "String"
+			},
+			{
+				"name": "TFNO_CLI",
+				"type": "String"
+			},
+			{
+				"name": "COD_CALLE",
+				"type": "String"
+			},
+			{
+				"name": "NUM_PUERTA",
+				"type": "String"
+			},
+			{
+				"name": "DUPLICADOR",
+				"type": "String"
+			},
+			{
+				"name": "CGV_CLI",
+				"type": "String"
+			},
+			{
+				"name": "DOC_ID",
+				"type": "String"
+			},
+			{
+				"name": "TIP_DOC",
+				"type": "String"
+			},
+			{
+				"name": "CO_PAIS",
+				"type": "String"
+			},
+			{
+				"name": "TIP_CLI",
+				"type": "String"
+			},
+			{
+				"name": "F_ALTA",
+				"type": "String"
+			},
+			{
+				"name": "F_BAJA",
+				"type": "String"
+			},
+			{
+				"name": "NRH",
+				"type": "String"
+			},
+			{
+				"name": "NRH_FAV",
+				"type": "String"
+			},
+			{
+				"name": "NRH_PEN",
+				"type": "String"
+			},
+			{
+				"name": "FAX_CLI",
+				"type": "String"
+			},
+			{
+				"name": "PERS_CONTACTO",
+				"type": "String"
+			},
+			{
+				"name": "CO_COND_FISCAL",
+				"type": "String"
+			},
+			{
+				"name": "SOUNDEX_AP1",
+				"type": "String"
+			},
+			{
+				"name": "SOUNDEX_AP2",
+				"type": "String"
+			},
+			{
+				"name": "REF_DIR",
+				"type": "String"
+			},
+			{
+				"name": "CUALIF_CLI",
+				"type": "String"
+			},
+			{
+				"name": "NUM_DEV_CHEQ",
+				"type": "String"
+			},
+			{
+				"name": "CANT_LETRAS_IMPAGAS",
+				"type": "String"
+			},
+			{
+				"name": "NUM_FISCAL",
+				"type": "String"
+			},
+			{
+				"name": "APE1_CLI_UP",
+				"type": "String"
+			},
+			{
+				"name": "DATOS",
+				"type": "String"
+			},
+			{
+				"name": "COD_POST",
+				"type": "String"
+			},
+			{
+				"name": "NIF",
+				"type": "String"
+			},
+			{
+				"name": "TFNO2_CLI",
+				"type": "String"
+			},
+			{
+				"name": "DATOS2",
+				"type": "String"
+			},
+			{
+				"name": "EST_CLI",
+				"type": "String"
+			},
+			{
+				"name": "SPEC_SIGNAL",
+				"type": "String"
+			},
+			{
+				"name": "APE3_CLI",
+				"type": "String"
+			},
+			{
+				"name": "APE1_CLI_ARAB",
+				"type": "String"
+			},
+			{
+				"name": "APE2_CLI_ARAB",
+				"type": "String"
+			},
+			{
+				"name": "APE3_CLI_ARAB",
+				"type": "String"
+			},
+			{
+				"name": "NOM_CLI_ARAB",
+				"type": "String"
+			},
+			{
+				"name": "APE1_CLI_ARAB_UP",
+				"type": "String"
+			},
+			{
+				"name": "IND_CASH_ONLY",
+				"type": "String"
+			},
+			{
+				"name": "COD_RATING",
+				"type": "String"
+			},
+			{
+				"name": "F_RATING",
+				"type": "String"
+			},
+			{
+				"name": "PASSPORT_NO",
+				"type": "String"
+			},
+			{
+				"name": "JOB_TITLE",
+				"type": "String"
+			},
+			{
+				"name": "NIF_WORK",
+				"type": "String"
+			},
+			{
+				"name": "F_BIRTH",
+				"type": "String"
+			},
+			{
+				"name": "TFNO3_CLI",
+				"type": "String"
+			},
+			{
+				"name": "EMAIL",
+				"type": "String"
+			},
+			{
+				"name": "OBSERVACIONES",
+				"type": "String"
+			},
+			{
+				"name": "PASSWORD",
+				"type": "String"
+			},
+			{
+				"name": "F_CASH_ONLY",
+				"type": "String"
+			},
+			{
+				"name": "EMAIL2",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

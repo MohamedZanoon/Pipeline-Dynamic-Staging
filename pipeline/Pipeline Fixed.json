@@ -1,0 +1,149 @@
+{
+	"name": "Pipeline Fixed",
+	"properties": {
+		"activities": [
+			{
+				"name": "Source to Staging File",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Source",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableNameSource": {
+								"value": "@pipeline().parameters.TableNameSource",
+								"type": "Expression"
+							},
+							"TableSchemaSource": {
+								"value": "@pipeline().parameters.TableSchemaSource",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Staging",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileNameStaging": {
+								"value": "@pipeline().parameters.FileNameStaging",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Staging File to Staging Database",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Source to Staging File",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Staging",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileNameStaging": {
+								"value": "@pipeline().parameters.FileNameStaging",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Destination",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableNameDestination": {
+								"value": "@pipeline().parameters.TableNameDestination",
+								"type": "Expression"
+							},
+							"TableSchemaDestination": {
+								"value": "@pipeline().parameters.TableSchemaDestination",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"TableNameSource": {
+				"type": "string"
+			},
+			"FileNameStaging": {
+				"type": "string"
+			},
+			"TableNameDestination": {
+				"type": "string"
+			},
+			"TableSchemaSource": {
+				"type": "string"
+			},
+			"TableSchemaDestination": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

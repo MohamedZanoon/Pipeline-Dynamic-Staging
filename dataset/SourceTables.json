@@ -1,0 +1,50 @@
+{
+	"name": "SourceTables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EWA_Staging",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "00-Configuration"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "TableSchemaSource",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TableNameSource",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FileNameStaging",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TableSchemaDestination",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TableNameDestination",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Order",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ProcessGUID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Configuration.SourceTables"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

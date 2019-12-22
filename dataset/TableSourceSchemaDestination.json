@@ -1,0 +1,43 @@
+{
+	"name": "TableSourceSchemaDestination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EWA_Staging",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "03 - Destinations"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "COLUMN_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DATA_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DATA_LENGTH",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NULLABLE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COLUMN_ID",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Configuration.SourceTableSchema"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
