@@ -141,7 +141,7 @@
 								"storedProcedureParameters": {
 									"DurationFirstCopy": {
 										"value": {
-											"value": "if(item().IsStagingFileExists ,0,@activity('Oracle Source to Staging File').output.copyDuration)",
+											"value": "@if(item().IsStagingFileExists ,0,activity('Oracle Source to Staging File').output.copyDuration)",
 											"type": "Expression"
 										},
 										"type": "Int32"
