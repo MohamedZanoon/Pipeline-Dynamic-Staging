@@ -58,7 +58,7 @@
 							"type": "Copy",
 							"dependsOn": [
 								{
-									"activity": "If Is Staging File not Exists",
+									"activity": "If Staging File not Exists",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -141,7 +141,7 @@
 								"storedProcedureParameters": {
 									"DurationFirstCopy": {
 										"value": {
-											"value": "@int(if(equals(item().IsStagingFileExists,1),0,variables('SourceCopyDuration')))",
+											"value": "if(item().IsStagingFileExists ,0,@activity('Oracle Source to Staging File').output.copyDuration)",
 											"type": "Expression"
 										},
 										"type": "Int32"
@@ -155,10 +155,10 @@
 									},
 									"StartFrom": {
 										"value": {
-											"value": "@variables('DestinationMaxDate')",
+											"value": "@activity('Lookup Get Max Date').output.firstRow.MaxDate",
 											"type": "Expression"
 										},
-										"type": "String"
+										"type": "Datetime"
 									},
 									"TableNameDestination": {
 										"value": {
@@ -605,7 +605,7 @@
 							}
 						},
 						{
-							"name": "If Is Staging File not Exists",
+							"name": "If Staging File not Exists",
 							"type": "IfCondition",
 							"dependsOn": [
 								{
@@ -618,9 +618,54 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@equals(item().IsStagingFileExists,0)",
+									"value": "@not(item().IsStagingFileExists)",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "Add Log Creating Staging File_copy1",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[sp_AddLog]",
+											"storedProcedureParameters": {
+												"Log": {
+													"value": {
+														"value": "lllllllllllllll test",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"PipelineRunID": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"ProcessGUID": {
+													"value": {
+														"value": "@item().ProcessGUID",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "EWA_Staging",
+											"type": "LinkedServiceReference"
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "Oracle Source to Staging File",
@@ -861,96 +906,6 @@
 										}
 									},
 									{
-										"name": "Source Copy Duration",
-										"type": "SetVariable",
-										"dependsOn": [
-											{
-												"activity": "Add Log Staging File Created",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"userProperties": [],
-										"typeProperties": {
-											"variableName": "SourceCopyDuration",
-											"value": {
-												"value": "@activity('Oracle Source to Staging File').output.copyDuration",
-												"type": "Expression"
-											}
-										}
-									},
-									{
-										"name": "Destination Max Date",
-										"type": "SetVariable",
-										"dependsOn": [
-											{
-												"activity": "Source Copy Duration",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"userProperties": [],
-										"typeProperties": {
-											"variableName": "DestinationMaxDate",
-											"value": {
-												"value": "@activity('Lookup Get Max Date').output.firstRow.MaxDate",
-												"type": "Expression"
-											}
-										}
-									},
-									{
-										"name": "Add Log Staging File Created_copy1",
-										"type": "SqlServerStoredProcedure",
-										"dependsOn": [
-											{
-												"activity": "Destination Max Date",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"storedProcedureName": "[dbo].[sp_AddLog]",
-											"storedProcedureParameters": {
-												"Log": {
-													"value": {
-														"value": "@variables('SourceCopyDuration')",
-														"type": "Expression"
-													},
-													"type": "String"
-												},
-												"PipelineRunID": {
-													"value": {
-														"value": "@pipeline().RunId",
-														"type": "Expression"
-													},
-													"type": "String"
-												},
-												"ProcessGUID": {
-													"value": {
-														"value": "@item().ProcessGUID",
-														"type": "Expression"
-													},
-													"type": "String"
-												}
-											}
-										},
-										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
-											"type": "LinkedServiceReference"
-										}
-									},
-									{
 										"name": "Add Log Creating Staging File",
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [],
@@ -1020,7 +975,7 @@
 								"storedProcedureParameters": {
 									"Log": {
 										"value": {
-											"value": "@if(equals(item().IsStagingFileExists,1),'Staging File is Exist','Staging File is not Exist')",
+											"value": "@if(item().IsStagingFileExists,'Staging File is Exist','Staging File is not Exist')",
 											"type": "Expression"
 										},
 										"type": "String"
