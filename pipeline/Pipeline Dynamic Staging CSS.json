@@ -155,7 +155,7 @@
 									},
 									"StartFrom": {
 										"value": {
-											"value": "@activity('Lookup Get Max Date').output.firstRow.MaxDate",
+											"value": "@variables('DestinationMaxDate')",
 											"type": "Expression"
 										},
 										"type": "DateTime"
@@ -872,6 +872,26 @@
 												"type": "Expression"
 											}
 										}
+									},
+									{
+										"name": "Destination Max Date",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Source Copy Duration",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "DestinationMaxDate",
+											"value": {
+												"value": "@activity('Lookup Get Max Date').output.firstRow.MaxDate",
+												"type": "Expression"
+											}
+										}
 									}
 								]
 							}
@@ -1189,6 +1209,9 @@
 			"SourceCopyDuration": {
 				"type": "String",
 				"defaultValue": "0"
+			},
+			"DestinationMaxDate": {
+				"type": "String"
 			}
 		},
 		"annotations": []
