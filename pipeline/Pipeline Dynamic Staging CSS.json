@@ -1260,12 +1260,6 @@
 		"variables": {
 			"SourceQuery": {
 				"type": "String"
-			},
-			"SourceCopyDuration": {
-				"type": "String"
-			},
-			"DestinationMaxDate": {
-				"type": "String"
 			}
 		},
 		"annotations": []
