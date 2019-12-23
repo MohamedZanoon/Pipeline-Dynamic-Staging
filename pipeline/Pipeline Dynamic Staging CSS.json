@@ -84,7 +84,8 @@
 									}
 								},
 								"sink": {
-									"type": "SqlServerSink"
+									"type": "SqlServerSink",
+									"writeBatchSize": 10
 								},
 								"enableStaging": false
 							},
