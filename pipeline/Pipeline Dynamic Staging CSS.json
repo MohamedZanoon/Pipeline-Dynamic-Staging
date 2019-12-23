@@ -481,7 +481,7 @@
 								"storedProcedureParameters": {
 									"Log": {
 										"value": {
-											"value": "@concat('------- Start Copy Data from ',item().TableNameSource, ' to ', item().TableNameDestination.' -------')",
+											"value": "@concat('------- Start Copy Data from ',item().TableNameSource, ' to ', item().TableNameDestination,' -------')",
 											"type": "Expression"
 										},
 										"type": "String"
