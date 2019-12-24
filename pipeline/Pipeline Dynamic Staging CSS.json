@@ -230,7 +230,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat('SELECT TABLE_NAME,COLUMN_NAME,DATA_TYPE,DATA_LENGTH,NULLABLE,COLUMN_ID\nFROM all_tab_cols\nwhere table_name = ''',item().TableNameSource,''';')",
+													"value": "@concat('SELECT TABLE_NAME,COLUMN_NAME,DATA_TYPE,DATA_LENGTH,NULLABLE,COLUMN_ID\nFROM all_tab_cols\nwhere  VIRTUAL_COLUMN =''NO'' AND table_name = ''',item().TableNameSource,''';')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
