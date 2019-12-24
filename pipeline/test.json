@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
-						"oracleReaderQuery": "SELECT TABLE_NAME,COLUMN_NAME,DATA_TYPE,DATA_LENGTH,NULLABLE,COLUMN_ID\nFROM all_tab_cols\nwhere UPPER(table_name) = 'USUARIOS'",
+						"oracleReaderQuery": "SELECT *\nFROM all_tab_cols\nwhere UPPER(table_name) = 'RECIBOS' AND VIRTUAL_COLUMN ='NO'",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
