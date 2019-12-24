@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow1",
+						"referenceName": "Data Flow Count",
 						"type": "DataFlowReference",
 						"datasetParameters": {
-							"Data Flow Count": {
+							"Source": {
 								"FileNameStaging": "Imp_Concepto"
 							},
-							"sink1": {
+							"Destenation": {
 								"FileNameStaging": "Count_Imp_Concepto"
 							}
 						}
