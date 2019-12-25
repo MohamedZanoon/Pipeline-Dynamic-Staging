@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "dataflow1",
+				"name": "Data Flow Count",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -23,7 +23,7 @@
 								"FileNameStaging": "Imp_Concepto"
 							},
 							"Destination": {
-								"FileNameStaging": "NewCount"
+								"FileNameStaging": "Count_Imp_Concepto"
 							}
 						}
 					},
