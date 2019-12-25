@@ -21,9 +21,6 @@
 						"datasetParameters": {
 							"Source": {
 								"FileNameStaging": "Imp_Concepto"
-							},
-							"Destenation": {
-								"FileNameStaging": "Count_Imp_Concepto"
 							}
 						}
 					},
