@@ -1,0 +1,2571 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "df-bi-ewa"
+		},
+		"Staging Account_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Staging Account'"
+		},
+		"CSS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CSS'"
+		},
+		"EWA_Staging_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EWA_Staging'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Staging Account')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('Staging Account_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EWA-PRDW01-IR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IGA-IR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Staging')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Staging Account",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"FileNameStaging": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "02 - Staging"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@concat(dataset().FileNameStaging,'.csv')",
+							"type": "Expression"
+						},
+						"container": "adf-staging"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "USUARIO",
+						"type": "String"
+					},
+					{
+						"name": "F_ACTUAL",
+						"type": "String"
+					},
+					{
+						"name": "PROGRAMA",
+						"type": "String"
+					},
+					{
+						"name": "COD_CLI",
+						"type": "String"
+					},
+					{
+						"name": "APE1_CLI",
+						"type": "String"
+					},
+					{
+						"name": "APE2_CLI",
+						"type": "String"
+					},
+					{
+						"name": "NOM_CLI",
+						"type": "String"
+					},
+					{
+						"name": "TFNO_CLI",
+						"type": "String"
+					},
+					{
+						"name": "COD_CALLE",
+						"type": "String"
+					},
+					{
+						"name": "NUM_PUERTA",
+						"type": "String"
+					},
+					{
+						"name": "DUPLICADOR",
+						"type": "String"
+					},
+					{
+						"name": "CGV_CLI",
+						"type": "String"
+					},
+					{
+						"name": "DOC_ID",
+						"type": "String"
+					},
+					{
+						"name": "TIP_DOC",
+						"type": "String"
+					},
+					{
+						"name": "CO_PAIS",
+						"type": "String"
+					},
+					{
+						"name": "TIP_CLI",
+						"type": "String"
+					},
+					{
+						"name": "F_ALTA",
+						"type": "String"
+					},
+					{
+						"name": "F_BAJA",
+						"type": "String"
+					},
+					{
+						"name": "NRH",
+						"type": "String"
+					},
+					{
+						"name": "NRH_FAV",
+						"type": "String"
+					},
+					{
+						"name": "NRH_PEN",
+						"type": "String"
+					},
+					{
+						"name": "FAX_CLI",
+						"type": "String"
+					},
+					{
+						"name": "PERS_CONTACTO",
+						"type": "String"
+					},
+					{
+						"name": "CO_COND_FISCAL",
+						"type": "String"
+					},
+					{
+						"name": "SOUNDEX_AP1",
+						"type": "String"
+					},
+					{
+						"name": "SOUNDEX_AP2",
+						"type": "String"
+					},
+					{
+						"name": "REF_DIR",
+						"type": "String"
+					},
+					{
+						"name": "CUALIF_CLI",
+						"type": "String"
+					},
+					{
+						"name": "NUM_DEV_CHEQ",
+						"type": "String"
+					},
+					{
+						"name": "CANT_LETRAS_IMPAGAS",
+						"type": "String"
+					},
+					{
+						"name": "NUM_FISCAL",
+						"type": "String"
+					},
+					{
+						"name": "APE1_CLI_UP",
+						"type": "String"
+					},
+					{
+						"name": "DATOS",
+						"type": "String"
+					},
+					{
+						"name": "COD_POST",
+						"type": "String"
+					},
+					{
+						"name": "NIF",
+						"type": "String"
+					},
+					{
+						"name": "TFNO2_CLI",
+						"type": "String"
+					},
+					{
+						"name": "DATOS2",
+						"type": "String"
+					},
+					{
+						"name": "EST_CLI",
+						"type": "String"
+					},
+					{
+						"name": "SPEC_SIGNAL",
+						"type": "String"
+					},
+					{
+						"name": "APE3_CLI",
+						"type": "String"
+					},
+					{
+						"name": "APE1_CLI_ARAB",
+						"type": "String"
+					},
+					{
+						"name": "APE2_CLI_ARAB",
+						"type": "String"
+					},
+					{
+						"name": "APE3_CLI_ARAB",
+						"type": "String"
+					},
+					{
+						"name": "NOM_CLI_ARAB",
+						"type": "String"
+					},
+					{
+						"name": "APE1_CLI_ARAB_UP",
+						"type": "String"
+					},
+					{
+						"name": "IND_CASH_ONLY",
+						"type": "String"
+					},
+					{
+						"name": "COD_RATING",
+						"type": "String"
+					},
+					{
+						"name": "F_RATING",
+						"type": "String"
+					},
+					{
+						"name": "PASSPORT_NO",
+						"type": "String"
+					},
+					{
+						"name": "JOB_TITLE",
+						"type": "String"
+					},
+					{
+						"name": "NIF_WORK",
+						"type": "String"
+					},
+					{
+						"name": "F_BIRTH",
+						"type": "String"
+					},
+					{
+						"name": "TFNO3_CLI",
+						"type": "String"
+					},
+					{
+						"name": "EMAIL",
+						"type": "String"
+					},
+					{
+						"name": "OBSERVACIONES",
+						"type": "String"
+					},
+					{
+						"name": "PASSWORD",
+						"type": "String"
+					},
+					{
+						"name": "F_CASH_ONLY",
+						"type": "String"
+					},
+					{
+						"name": "EMAIL2",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Staging Account')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/StagingWithoutFileName')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Staging Account",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "02 - Staging"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "adf-staging"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Staging Account')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CSS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('CSS_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "IGA-IR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/IGA-IR')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EWA_Staging')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('EWA_Staging_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "EWA-PRDW01-IR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/EWA-PRDW01-IR')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destination')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EWA_Staging",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TableNameDestination": {
+						"type": "string"
+					},
+					"TableSchemaDestination": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "03 - Destinations"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "USUARIO",
+						"type": "nvarchar"
+					},
+					{
+						"name": "F_ACTUAL",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "PROGRAMA",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_CLI",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "APE1_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE2_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NOM_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TFNO_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_CALLE",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "NUM_PUERTA",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "DUPLICADOR",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CGV_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DOC_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TIP_DOC",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CO_PAIS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TIP_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "F_ALTA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "F_BAJA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "NRH",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "NRH_FAV",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "NRH_PEN",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "FAX_CLI",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "PERS_CONTACTO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "CO_COND_FISCAL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SOUNDEX_AP1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SOUNDEX_AP2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "REF_DIR",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CUALIF_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NUM_DEV_CHEQ",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "CANT_LETRAS_IMPAGAS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "NUM_FISCAL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE1_CLI_UP",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DATOS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_POST",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NIF",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "TFNO2_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DATOS2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EST_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SPEC_SIGNAL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE3_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE1_CLI_ARAB",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE2_CLI_ARAB",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE3_CLI_ARAB",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NOM_CLI_ARAB",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE1_CLI_ARAB_UP",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IND_CASH_ONLY",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "COD_RATING",
+						"type": "nvarchar"
+					},
+					{
+						"name": "F_RATING",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "PASSPORT_NO",
+						"type": "nvarchar"
+					},
+					{
+						"name": "JOB_TITLE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NIF_WORK",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "F_BIRTH",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TFNO3_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EMAIL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBSERVACIONES",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PASSWORD",
+						"type": "nvarchar"
+					},
+					{
+						"name": "F_CASH_ONLY",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "EMAIL2",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().TableSchemaDestination",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableNameDestination",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GetMaxDate')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EWA_Staging",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "00-Configuration"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IsDestinationTableExists')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EWA_Staging",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "00-Configuration"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CSS",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TableNameSource": {
+						"type": "string"
+					},
+					"TableSchemaSource": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "01 - Sources"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().TableSchemaSource",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableNameSource",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/CSS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceTables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EWA_Staging",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "00-Configuration"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "TableSchemaSource",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TableNameSource",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FileNameStaging",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TableSchemaDestination",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TableNameDestination",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Order",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ProcessGUID",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "vw_Configuration.SourceTables"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TableSourceSchema')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CSS",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "01 - Sources"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/CSS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TableSourceSchemaDestination')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EWA_Staging",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "03 - Destinations"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "COLUMN_NAME",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DATA_TYPE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DATA_LENGTH",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NULLABLE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COLUMN_ID",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Configuration.SourceTableSchema"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Data Flow Count')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Staging",
+								"type": "DatasetReference"
+							},
+							"name": "Source",
+							"typeProperties": {}
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "StagingWithoutFileName",
+								"type": "DatasetReference"
+							},
+							"name": "Destination"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Count"
+						}
+					],
+					"script": "\n\nsource(output(\n\t\tUSUARIO as string,\n\t\tF_ACTUAL as string,\n\t\tPROGRAMA as string,\n\t\tCOD_CLI as string,\n\t\tAPE1_CLI as string,\n\t\tAPE2_CLI as string,\n\t\tNOM_CLI as string,\n\t\tTFNO_CLI as string,\n\t\tCOD_CALLE as string,\n\t\tNUM_PUERTA as string,\n\t\tDUPLICADOR as string,\n\t\tCGV_CLI as string,\n\t\tDOC_ID as string,\n\t\tTIP_DOC as string,\n\t\tCO_PAIS as string,\n\t\tTIP_CLI as string,\n\t\tF_ALTA as string,\n\t\tF_BAJA as string,\n\t\tNRH as string,\n\t\tNRH_FAV as string,\n\t\tNRH_PEN as string,\n\t\tFAX_CLI as string,\n\t\tPERS_CONTACTO as string,\n\t\tCO_COND_FISCAL as string,\n\t\tSOUNDEX_AP1 as string,\n\t\tSOUNDEX_AP2 as string,\n\t\tREF_DIR as string,\n\t\tCUALIF_CLI as string,\n\t\tNUM_DEV_CHEQ as string,\n\t\tCANT_LETRAS_IMPAGAS as string,\n\t\tNUM_FISCAL as string,\n\t\tAPE1_CLI_UP as string,\n\t\tDATOS as string,\n\t\tCOD_POST as string,\n\t\tNIF as string,\n\t\tTFNO2_CLI as string,\n\t\tDATOS2 as string,\n\t\tEST_CLI as string,\n\t\tSPEC_SIGNAL as string,\n\t\tAPE3_CLI as string,\n\t\tAPE1_CLI_ARAB as string,\n\t\tAPE2_CLI_ARAB as string,\n\t\tAPE3_CLI_ARAB as string,\n\t\tNOM_CLI_ARAB as string,\n\t\tAPE1_CLI_ARAB_UP as string,\n\t\tIND_CASH_ONLY as string,\n\t\tCOD_RATING as string,\n\t\tF_RATING as string,\n\t\tPASSPORT_NO as string,\n\t\tJOB_TITLE as string,\n\t\tNIF_WORK as string,\n\t\tF_BIRTH as string,\n\t\tTFNO3_CLI as string,\n\t\tEMAIL as string,\n\t\tOBSERVACIONES as string,\n\t\tPASSWORD as string,\n\t\tF_CASH_ONLY as string,\n\t\tEMAIL2 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Source\nSource aggregate(groupBy(PASSWORD),\n\tCount = count()) ~> Count\nCount sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['NewCount'],\n\tpartitionBy('hash', 1)) ~> Destination"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Staging')]",
+				"[concat(variables('factoryId'), '/datasets/StagingWithoutFileName')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pipeline Count by Data Flow')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data Flow Count",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Data Flow Count",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Source": {
+										"FileNameStaging": "Imp_Concepto"
+									},
+									"Destination": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/Data Flow Count')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pipeline Count')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": {
+									"value": "@concat('SELECT COUNT(*) FROM ', pipeline().parameters.TableSchema,'.',pipeline().parameters.TableName)",
+									"type": "Expression"
+								},
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "TableSourceSchema",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Staging",
+								"type": "DatasetReference",
+								"parameters": {
+									"FileNameStaging": {
+										"value": "@concat('Count ', pipeline().parameters.TableName)",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"parameters": {
+					"TableSchema": {
+						"type": "string",
+						"defaultValue": "SGC"
+					},
+					"TableName": {
+						"type": "string",
+						"defaultValue": "IMP_CONCEPTO"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/TableSourceSchema')]",
+				"[concat(variables('factoryId'), '/datasets/Staging')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pipeline Dynamic Staging CSS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Lookup Source Tables",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Add Log Get Source Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nORDER BY [Order]",
+								"queryTimeout": "02:00:00"
+							},
+							"dataset": {
+								"referenceName": "SourceTables",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "For Each Staging",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Add Log Number of Processes",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup Source Tables').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "Staging File to SQL Destination",
+									"type": "Copy",
+									"dependsOn": [
+										{
+											"activity": "If Staging File not Exists",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "DelimitedTextSource",
+											"storeSettings": {
+												"type": "AzureBlobStorageReadSettings",
+												"recursive": true
+											},
+											"formatSettings": {
+												"type": "DelimitedTextReadSettings"
+											}
+										},
+										"sink": {
+											"type": "SqlServerSink",
+											"writeBatchSize": 10
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "Staging",
+											"type": "DatasetReference",
+											"parameters": {
+												"FileNameStaging": {
+													"value": "@item().FileNameStaging",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "Destination",
+											"type": "DatasetReference",
+											"parameters": {
+												"TableNameDestination": {
+													"value": "@item().TableNameDestination",
+													"type": "Expression"
+												},
+												"TableSchemaDestination": {
+													"value": "@item().TableSchemaDestination",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								},
+								{
+									"name": "Stored Procedure Add Process Details",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "Staging File to SQL Destination",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[sp_AddProcessDetails]",
+										"storedProcedureParameters": {
+											"DurationFirstCopy": {
+												"value": {
+													"value": "@if(item().IsStagingFileExists ,0,activity('Oracle Source to Staging File').output.copyDuration)",
+													"type": "Expression"
+												},
+												"type": "Int32"
+											},
+											"DurationSecondCopy": {
+												"value": {
+													"value": "@activity('Staging File to SQL Destination').output.copyDuration",
+													"type": "Expression"
+												},
+												"type": "Int32"
+											},
+											"StartFrom": {
+												"value": {
+													"value": "@activity('Lookup Get Max Date').output.firstRow.MaxDate",
+													"type": "Expression"
+												},
+												"type": "Datetime"
+											},
+											"TableNameDestination": {
+												"value": {
+													"value": "@item().TableNameDestination",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"ProcessGUID": {
+												"value": {
+													"value": "@item().ProcessGUID",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"PipelineRunID": {
+												"value": {
+													"value": "@pipeline().RunId",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"TableNameSource": {
+												"value": {
+													"value": "@item().TableNameSource",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "EWA_Staging",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "If Destination Table not Exist",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "Add Log Is Destination Table Exists",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(activity('Lookup Is Destination Table Exists').output.firstRow.Flag,0)",
+											"type": "Expression"
+										},
+										"ifTrueActivities": [
+											{
+												"name": "Copy From Table Source Schema",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "OracleSource",
+														"oracleReaderQuery": {
+															"value": "@concat('SELECT TABLE_NAME,COLUMN_NAME,DATA_TYPE,DATA_LENGTH,NULLABLE,COLUMN_ID\nFROM all_tab_cols\nwhere  VIRTUAL_COLUMN =''NO'' AND table_name = ''',item().TableNameSource,''';')",
+															"type": "Expression"
+														},
+														"partitionOption": "None",
+														"queryTimeout": "02:00:00"
+													},
+													"sink": {
+														"type": "DelimitedTextSink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
+														}
+													},
+													"enableStaging": false
+												},
+												"inputs": [
+													{
+														"referenceName": "TableSourceSchema",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "Staging",
+														"type": "DatasetReference",
+														"parameters": {
+															"FileNameStaging": {
+																"value": "@concat('SchemaSourceTable-',item().TableNameSource)",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Copy From Table Source Schema To Destination",
+												"type": "Copy",
+												"dependsOn": [
+													{
+														"activity": "Copy From Table Source Schema",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "DelimitedTextSource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true
+														},
+														"formatSettings": {
+															"type": "DelimitedTextReadSettings"
+														}
+													},
+													"sink": {
+														"type": "SqlServerSink"
+													},
+													"enableStaging": false
+												},
+												"inputs": [
+													{
+														"referenceName": "Staging",
+														"type": "DatasetReference",
+														"parameters": {
+															"FileNameStaging": {
+																"value": "@concat('SchemaSourceTable-',item().TableNameSource)",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "TableSourceSchemaDestination",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											},
+											{
+												"name": "Generate Destination Table",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Copy From Table Source Schema To Destination",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[sp_GenerateDestinationTable]",
+													"storedProcedureParameters": {
+														"TableNameDestination": {
+															"value": {
+																"value": "@item().TableNameDestination",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"TableNameSource": {
+															"value": {
+																"value": "@item().TableNameSource",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "EWA_Staging",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Add Log Table Created",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Generate Destination Table",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[sp_AddLog]",
+													"storedProcedureParameters": {
+														"Log": {
+															"value": {
+																"value": "@concat('Destination Table ',item().TableNameSource, ' Created')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PipelineRunID": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ProcessGUID": {
+															"value": {
+																"value": "@item().ProcessGUID",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "EWA_Staging",
+													"type": "LinkedServiceReference"
+												}
+											}
+										]
+									}
+								},
+								{
+									"name": "Lookup Is Destination Table Exists",
+									"type": "Lookup",
+									"dependsOn": [
+										{
+											"activity": "Add Log Start Copy",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "SqlServerSource",
+											"sqlReaderStoredProcedureName": "[[dbo].[sp_IsTableExists]",
+											"storedProcedureParameters": {
+												"TableNameDestination": {
+													"type": "String",
+													"value": {
+														"value": "@item().TableNameDestination",
+														"type": "Expression"
+													}
+												},
+												"TableNameSource": {
+													"type": "String",
+													"value": {
+														"value": "@item().TableNameSource",
+														"type": "Expression"
+													}
+												}
+											},
+											"queryTimeout": "02:00:00"
+										},
+										"dataset": {
+											"referenceName": "IsDestinationTableExists",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									}
+								},
+								{
+									"name": "Add Log Start Copy",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[sp_AddLog]",
+										"storedProcedureParameters": {
+											"Log": {
+												"value": {
+													"value": "@concat('------- Start Copy Data from ',item().TableNameSource, ' to ', item().TableNameDestination,' -------')",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"PipelineRunID": {
+												"value": {
+													"value": "@pipeline().RunId",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"ProcessGUID": {
+												"value": {
+													"value": "@item().ProcessGUID",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "EWA_Staging",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "Add Log Is Destination Table Exists",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "Lookup Is Destination Table Exists",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[sp_AddLog]",
+										"storedProcedureParameters": {
+											"Log": {
+												"value": {
+													"value": "@if(equals(activity('Lookup Is Destination Table Exists').output.firstRow.Flag,1),'Destination Table is Exist','Destination Table is not Exist')",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"PipelineRunID": {
+												"value": {
+													"value": "@pipeline().RunId",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"ProcessGUID": {
+												"value": {
+													"value": "@item().ProcessGUID",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "EWA_Staging",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "Add Log End Copy",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "If Is Staging File Exists - Update",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[sp_AddLog]",
+										"storedProcedureParameters": {
+											"Log": {
+												"value": {
+													"value": "@concat('End Copy Data from ',item().TableNameSource, ' to ', item().TableNameDestination)",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"PipelineRunID": {
+												"value": {
+													"value": "@pipeline().RunId",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"ProcessGUID": {
+												"value": {
+													"value": "@item().ProcessGUID",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "EWA_Staging",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "If Staging File not Exists",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "Add Log Is Staging File Exists",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@not(item().IsStagingFileExists)",
+											"type": "Expression"
+										},
+										"ifFalseActivities": [
+											{
+												"name": "Add Log Use Existing Staging File",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[sp_AddLog]",
+													"storedProcedureParameters": {
+														"Log": {
+															"value": {
+																"value": "Use Existing Staging File",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PipelineRunID": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ProcessGUID": {
+															"value": {
+																"value": "@item().ProcessGUID",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "EWA_Staging",
+													"type": "LinkedServiceReference"
+												}
+											}
+										],
+										"ifTrueActivities": [
+											{
+												"name": "Oracle Source to Staging File",
+												"type": "Copy",
+												"dependsOn": [
+													{
+														"activity": "Add Query",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "OracleSource",
+														"oracleReaderQuery": {
+															"value": "@variables('SourceQuery')",
+															"type": "Expression"
+														},
+														"partitionOption": "None",
+														"queryTimeout": "02:00:00"
+													},
+													"sink": {
+														"type": "DelimitedTextSink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
+														}
+													},
+													"enableStaging": false
+												},
+												"inputs": [
+													{
+														"referenceName": "Source",
+														"type": "DatasetReference",
+														"parameters": {
+															"TableNameSource": {
+																"value": "@item().TableNameSource",
+																"type": "Expression"
+															},
+															"TableSchemaSource": {
+																"value": "@item().TableSchemaSource",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "Staging",
+														"type": "DatasetReference",
+														"parameters": {
+															"FileNameStaging": {
+																"value": "@item().FileNameStaging",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "Lookup Get Max Date",
+												"type": "Lookup",
+												"dependsOn": [
+													{
+														"activity": "Add Log Creating Staging File",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderStoredProcedureName": "[[dbo].[sp_GetTableMaxDate]",
+														"storedProcedureParameters": {
+															"tablename": {
+																"type": "String",
+																"value": {
+																	"value": "@item().TableNameDestination",
+																	"type": "Expression"
+																}
+															}
+														},
+														"queryTimeout": "02:00:00"
+													},
+													"dataset": {
+														"referenceName": "GetMaxDate",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												}
+											},
+											{
+												"name": "Add Query",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Source Query",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[sp_AddQuery]",
+													"storedProcedureParameters": {
+														"PipelineRunID": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ProcessGUID": {
+															"value": {
+																"value": "@item().ProcessGUID",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"Query": {
+															"value": {
+																"value": "@variables('SourceQuery')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"IsDestinationTableExists": {
+															"value": {
+																"value": "@activity('Lookup Is Destination Table Exists').output.firstRow.Flag",
+																"type": "Expression"
+															},
+															"type": "Int32"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "EWA_Staging",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Source Query",
+												"type": "SetVariable",
+												"dependsOn": [
+													{
+														"activity": "Lookup Get Max Date",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "SourceQuery",
+													"value": {
+														"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', activity('Lookup Get Max Date').output.firstRow.MaxDate,''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
+														"type": "Expression"
+													}
+												}
+											},
+											{
+												"name": "Add Log Staging File Created",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [
+													{
+														"activity": "Oracle Source to Staging File",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[sp_AddLog]",
+													"storedProcedureParameters": {
+														"Log": {
+															"value": {
+																"value": "@concat('Staging File ',item().FileNameStaging, ' Created')",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PipelineRunID": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ProcessGUID": {
+															"value": {
+																"value": "@item().ProcessGUID",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "EWA_Staging",
+													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Add Log Creating Staging File",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[sp_AddLog]",
+													"storedProcedureParameters": {
+														"Log": {
+															"value": {
+																"value": "Creating Staging File",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"PipelineRunID": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ProcessGUID": {
+															"value": {
+																"value": "@item().ProcessGUID",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "EWA_Staging",
+													"type": "LinkedServiceReference"
+												}
+											}
+										]
+									}
+								},
+								{
+									"name": "Add Log Is Staging File Exists",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "If Destination Table not Exist",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": "[[dbo].[sp_AddLog]",
+										"storedProcedureParameters": {
+											"Log": {
+												"value": {
+													"value": "@if(item().IsStagingFileExists,'Staging File is Exist','Staging File is not Exist')",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"PipelineRunID": {
+												"value": {
+													"value": "@pipeline().RunId",
+													"type": "Expression"
+												},
+												"type": "String"
+											},
+											"ProcessGUID": {
+												"value": {
+													"value": "@item().ProcessGUID",
+													"type": "Expression"
+												},
+												"type": "String"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "EWA_Staging",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "If Is Staging File Exists - Update",
+									"type": "IfCondition",
+									"dependsOn": [
+										{
+											"activity": "Stored Procedure Add Process Details",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@equals(item().IsStagingFileExists,1)",
+											"type": "Expression"
+										},
+										"ifTrueActivities": [
+											{
+												"name": "Update Is Staging File Exists Column",
+												"type": "SqlServerStoredProcedure",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"storedProcedureName": "[[dbo].[sp_UpdateIsStagingFileExists]",
+													"storedProcedureParameters": {
+														"PipelineRunID": {
+															"value": {
+																"value": "@pipeline().RunId",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"ProcessGUID": {
+															"value": {
+																"value": "@item().ProcessGUID",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"TableNameDestination": {
+															"value": {
+																"value": "@item().TableNameDestination",
+																"type": "Expression"
+															},
+															"type": "String"
+														},
+														"TableNameSource": {
+															"value": {
+																"value": "@item().TableNameSource",
+																"type": "Expression"
+															},
+															"type": "String"
+														}
+													}
+												},
+												"linkedServiceName": {
+													"referenceName": "EWA_Staging",
+													"type": "LinkedServiceReference"
+												}
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Add Log Start",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_AddLog]",
+							"storedProcedureParameters": {
+								"Log": {
+									"value": {
+										"value": "=======> Pipeline Started <=======",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ProcessGUID": {
+									"value": null,
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "EWA_Staging",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Add Log End",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "For Each Staging",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_AddLog]",
+							"storedProcedureParameters": {
+								"Log": {
+									"value": {
+										"value": "=======> Pipeline Ended <=======",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ProcessGUID": {
+									"value": null,
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "EWA_Staging",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Add Log Get Source Tables",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Add Log Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_AddLog]",
+							"storedProcedureParameters": {
+								"Log": {
+									"value": {
+										"value": "Get Source Tables",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ProcessGUID": {
+									"value": null,
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "EWA_Staging",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Add Log Number of Processes",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Lookup Source Tables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_AddLog]",
+							"storedProcedureParameters": {
+								"Log": {
+									"value": {
+										"value": "@concat('Number of Processes: ',activity('Lookup Source Tables').output.count)",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ProcessGUID": {
+									"value": null,
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "EWA_Staging",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"variables": {
+					"SourceQuery": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceTables')]",
+				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging')]",
+				"[concat(variables('factoryId'), '/datasets/Staging')]",
+				"[concat(variables('factoryId'), '/datasets/Destination')]",
+				"[concat(variables('factoryId'), '/datasets/IsDestinationTableExists')]",
+				"[concat(variables('factoryId'), '/datasets/TableSourceSchema')]",
+				"[concat(variables('factoryId'), '/datasets/TableSourceSchemaDestination')]",
+				"[concat(variables('factoryId'), '/datasets/Source')]",
+				"[concat(variables('factoryId'), '/datasets/GetMaxDate')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pipeline Fixed')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Source to Staging File",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Source",
+								"type": "DatasetReference",
+								"parameters": {
+									"TableNameSource": {
+										"value": "@pipeline().parameters.TableNameSource",
+										"type": "Expression"
+									},
+									"TableSchemaSource": {
+										"value": "@pipeline().parameters.TableSchemaSource",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Staging",
+								"type": "DatasetReference",
+								"parameters": {
+									"FileNameStaging": {
+										"value": "@pipeline().parameters.FileNameStaging",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					},
+					{
+						"name": "Staging File to Staging Database",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Source to Staging File",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "SqlServerSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Staging",
+								"type": "DatasetReference",
+								"parameters": {
+									"FileNameStaging": {
+										"value": "@pipeline().parameters.FileNameStaging",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Destination",
+								"type": "DatasetReference",
+								"parameters": {
+									"TableNameDestination": {
+										"value": "@pipeline().parameters.TableNameDestination",
+										"type": "Expression"
+									},
+									"TableSchemaDestination": {
+										"value": "@pipeline().parameters.TableSchemaDestination",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"parameters": {
+					"TableNameSource": {
+						"type": "string"
+					},
+					"FileNameStaging": {
+						"type": "string"
+					},
+					"TableNameDestination": {
+						"type": "string"
+					},
+					"TableSchemaSource": {
+						"type": "string"
+					},
+					"TableSchemaDestination": {
+						"type": "string"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Source')]",
+				"[concat(variables('factoryId'), '/datasets/Staging')]",
+				"[concat(variables('factoryId'), '/datasets/Destination')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/test')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy From Table Source Schema",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"oracleReaderQuery": "SELECT *\nFROM all_tab_cols\nwhere UPPER(table_name) = 'RECIBOS' AND VIRTUAL_COLUMN ='NO'",
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "TableSourceSchema",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Staging",
+								"type": "DatasetReference",
+								"parameters": {
+									"FileNameStaging": {
+										"value": "SchemaSourceTable",
+										"type": "Expression"
+									}
+								}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/TableSourceSchema')]",
+				"[concat(variables('factoryId'), '/datasets/Staging')]"
+			]
+		}
+	]
+}
