@@ -415,6 +415,34 @@
 											"referenceName": "EWA_Staging",
 											"type": "LinkedServiceReference"
 										}
+									},
+									{
+										"name": "GetMinYear",
+										"type": "Lookup",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"dataset": {
+												"referenceName": "Source",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										}
 									}
 								]
 							}
@@ -1264,6 +1292,9 @@
 		],
 		"variables": {
 			"SourceQuery": {
+				"type": "String"
+			},
+			"MinYear": {
 				"type": "String"
 			}
 		},
