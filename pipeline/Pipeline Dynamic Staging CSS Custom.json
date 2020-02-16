@@ -922,7 +922,7 @@
 										"typeProperties": {
 											"variableName": "SourceQuery",
 											"value": {
-												"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', activity('Lookup Get Max Date').output.firstRow.MaxDate,''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
+												"value": "@concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE EXTRACT(YEAR FROM MIN(F_ACTUAL))\n=',variables('Year') )",
 												"type": "Expression"
 											}
 										}
