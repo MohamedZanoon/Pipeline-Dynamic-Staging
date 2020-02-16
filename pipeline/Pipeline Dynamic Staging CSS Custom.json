@@ -216,7 +216,7 @@
 								},
 								"ifFalseActivities": [
 									{
-										"name": "Lookup Get Max Year From Destination",
+										"name": "Get Max Year From Destination",
 										"type": "Lookup",
 										"dependsOn": [],
 										"policy": {
@@ -230,7 +230,7 @@
 										"typeProperties": {
 											"source": {
 												"type": "SqlServerSource",
-												"sqlReaderStoredProcedureName": "[dbo].[sp_GetTableMaxDate]",
+												"sqlReaderStoredProcedureName": "[dbo].[sp_GetTableMaxYear]",
 												"storedProcedureParameters": {
 													"tablename": {
 														"type": "String",
@@ -245,6 +245,26 @@
 											"dataset": {
 												"referenceName": "GetMaxDate",
 												"type": "DatasetReference"
+											}
+										}
+									},
+									{
+										"name": "Set Year",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Get Max Year From Destination",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "Year",
+											"value": {
+												"value": "@activity('Get Max Year From Destination').output",
+												"type": "Expression"
 											}
 										}
 									}
@@ -452,7 +472,7 @@
 										}
 									},
 									{
-										"name": "GetMinYear",
+										"name": "Get Min Year",
 										"type": "Lookup",
 										"dependsOn": [],
 										"policy": {
@@ -488,7 +508,7 @@
 										"type": "SetVariable",
 										"dependsOn": [
 											{
-												"activity": "GetMinYear",
+												"activity": "Get Min Year",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -496,9 +516,9 @@
 										],
 										"userProperties": [],
 										"typeProperties": {
-											"variableName": "MinYear",
+											"variableName": "Year",
 											"value": {
-												"value": "@activity('GetMinYear').output",
+												"value": "@activity('Get Min Year').output",
 												"type": "Expression"
 											}
 										}
