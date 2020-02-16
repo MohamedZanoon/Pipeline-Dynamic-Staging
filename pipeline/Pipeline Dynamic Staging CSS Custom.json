@@ -487,7 +487,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat('SELECT EXTRACT(YEAR FROM MIN(F_ACTUAL))\nFROM ',item().TableSchemaSource,'.',item().TableNameSource)",
+													"value": "@concat('SELECT EXTRACT(YEAR FROM MIN(F_ACTUAL)) MinYear\nFROM ',item().TableSchemaSource,'.',item().TableNameSource)",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -518,7 +518,7 @@
 										"typeProperties": {
 											"variableName": "Year",
 											"value": {
-												"value": "@activity('Get Min Year').output",
+												"value": "@activity('Get Min Year').output.firstRow.MinYear",
 												"type": "Expression"
 											}
 										}
