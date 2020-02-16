@@ -1097,7 +1097,7 @@
 					"storedProcedureParameters": {
 						"Log": {
 							"value": {
-								"value": "=======> Pipeline Started <=======",
+								"value": "=======> Pipeline Custom Started <=======",
 								"type": "Expression"
 							},
 							"type": "String"
@@ -1144,7 +1144,7 @@
 					"storedProcedureParameters": {
 						"Log": {
 							"value": {
-								"value": "=======> Pipeline Ended <=======",
+								"value": "=======> Pipeline Custom Ended <=======",
 								"type": "Expression"
 							},
 							"type": "String"
