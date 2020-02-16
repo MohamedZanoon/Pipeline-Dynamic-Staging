@@ -214,6 +214,41 @@
 									"value": "@equals(activity('Lookup Is Destination Table Exists').output.firstRow.Flag,0)",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "Lookup Get Max Year From Destination",
+										"type": "Lookup",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "SqlServerSource",
+												"sqlReaderStoredProcedureName": "[dbo].[sp_GetTableMaxDate]",
+												"storedProcedureParameters": {
+													"tablename": {
+														"type": "String",
+														"value": {
+															"value": "@item().TableNameDestination",
+															"type": "Expression"
+														}
+													}
+												},
+												"queryTimeout": "02:00:00"
+											},
+											"dataset": {
+												"referenceName": "GetMaxDate",
+												"type": "DatasetReference"
+											}
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "Copy From Table Source Schema",
@@ -796,46 +831,6 @@
 										]
 									},
 									{
-										"name": "Lookup Get Max Date",
-										"type": "Lookup",
-										"dependsOn": [
-											{
-												"activity": "Add Log Creating Staging File",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "SqlServerSource",
-												"sqlReaderStoredProcedureName": "[dbo].[sp_GetTableMaxDate]",
-												"storedProcedureParameters": {
-													"tablename": {
-														"type": "String",
-														"value": {
-															"value": "@item().TableNameDestination",
-															"type": "Expression"
-														}
-													}
-												},
-												"queryTimeout": "02:00:00"
-											},
-											"dataset": {
-												"referenceName": "GetMaxDate",
-												"type": "DatasetReference"
-											}
-										}
-									},
-									{
 										"name": "Add Query",
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [
@@ -897,7 +892,7 @@
 										"type": "SetVariable",
 										"dependsOn": [
 											{
-												"activity": "Lookup Get Max Date",
+												"activity": "Add Log Creating Staging File",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -1318,7 +1313,7 @@
 			"SourceQuery": {
 				"type": "String"
 			},
-			"MinYear": {
+			"Year": {
 				"type": "String"
 			}
 		},
