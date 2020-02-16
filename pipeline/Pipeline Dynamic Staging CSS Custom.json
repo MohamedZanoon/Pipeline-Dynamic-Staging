@@ -263,7 +263,7 @@
 										"typeProperties": {
 											"variableName": "Year",
 											"value": {
-												"value": "@activity('Get Max Year From Destination').output",
+												"value": "@activity('Get Max Year From Destination').output.firstRow.MaxYear",
 												"type": "Expression"
 											}
 										}
