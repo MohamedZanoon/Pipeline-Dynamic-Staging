@@ -267,6 +267,56 @@
 												"type": "Expression"
 											}
 										}
+									},
+									{
+										"name": "Add Log Max Year in Destination",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [
+											{
+												"activity": "Set Year",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[sp_AddLog]",
+											"storedProcedureParameters": {
+												"Log": {
+													"value": {
+														"value": "@concat('Max Year in Destination',variables('Year') )",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"PipelineRunID": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"ProcessGUID": {
+													"value": {
+														"value": "@item().ProcessGUID",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "EWA_Staging",
+											"type": "LinkedServiceReference"
+										}
 									}
 								],
 								"ifTrueActivities": [
@@ -521,6 +571,56 @@
 												"value": "@activity('Get Min Year').output.firstRow.MinYear",
 												"type": "Expression"
 											}
+										}
+									},
+									{
+										"name": "Add Log Min Year",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [
+											{
+												"activity": "Set MIN Year",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[sp_AddLog]",
+											"storedProcedureParameters": {
+												"Log": {
+													"value": {
+														"value": "@concat('Min Year ',variables('Year') )",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"PipelineRunID": {
+													"value": {
+														"value": "@pipeline().RunId",
+														"type": "Expression"
+													},
+													"type": "String"
+												},
+												"ProcessGUID": {
+													"value": {
+														"value": "@item().ProcessGUID",
+														"type": "Expression"
+													},
+													"type": "String"
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "EWA_Staging",
+											"type": "LinkedServiceReference"
 										}
 									}
 								]
