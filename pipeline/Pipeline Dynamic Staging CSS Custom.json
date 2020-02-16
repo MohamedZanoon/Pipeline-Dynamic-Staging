@@ -922,7 +922,7 @@
 										"typeProperties": {
 											"variableName": "SourceQuery",
 											"value": {
-												"value": "@concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE EXTRACT(YEAR FROM MIN(F_ACTUAL))\n=',variables('Year') )",
+												"value": "@concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE EXTRACT(YEAR FROM F_ACTUAL)\n=',variables('Year') )",
 												"type": "Expression"
 											}
 										}
