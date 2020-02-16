@@ -524,7 +524,14 @@
 									{
 										"name": "Get Min Year",
 										"type": "Lookup",
-										"dependsOn": [],
+										"dependsOn": [
+											{
+												"activity": "Add Log Table Created",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
 										"policy": {
 											"timeout": "7.00:00:00",
 											"retry": 0,
@@ -554,7 +561,7 @@
 										}
 									},
 									{
-										"name": "Set MIN Year",
+										"name": "Set Min Year",
 										"type": "SetVariable",
 										"dependsOn": [
 											{
@@ -578,7 +585,7 @@
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [
 											{
-												"activity": "Set MIN Year",
+												"activity": "Set Min Year",
 												"dependencyConditions": [
 													"Succeeded"
 												]
