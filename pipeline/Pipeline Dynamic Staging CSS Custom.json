@@ -263,7 +263,7 @@
 										"typeProperties": {
 											"variableName": "Year",
 											"value": {
-												"value": "@activity('Get Max Year From Destination').output.firstRow.MaxYear",
+												"value": "@string(activity('Get Max Year From Destination').output.firstRow.MaxYear)",
 												"type": "Expression"
 											}
 										}
@@ -524,14 +524,7 @@
 									{
 										"name": "Get Min Year",
 										"type": "Lookup",
-										"dependsOn": [
-											{
-												"activity": "Add Log Table Created",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
+										"dependsOn": [],
 										"policy": {
 											"timeout": "7.00:00:00",
 											"retry": 0,
@@ -575,7 +568,7 @@
 										"typeProperties": {
 											"variableName": "Year",
 											"value": {
-												"value": "@activity('Get Min Year').output.firstRow.MinYear",
+												"value": "@string(activity('Get Min Year').output.firstRow.MinYear)",
 												"type": "Expression"
 											}
 										}
