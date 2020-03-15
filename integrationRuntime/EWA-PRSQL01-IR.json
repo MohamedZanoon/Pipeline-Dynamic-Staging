@@ -1,0 +1,7 @@
+{
+	"name": "EWA-PRSQL01-IR",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "Reporting Server - Development Server"
+	}
+}
