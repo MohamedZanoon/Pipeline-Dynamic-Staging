@@ -251,7 +251,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "TableSourceSchema",
+												"referenceName": "TableSourceSchemaDDI",
 												"type": "DatasetReference"
 											}
 										],
