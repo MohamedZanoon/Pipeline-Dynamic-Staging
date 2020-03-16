@@ -5,7 +5,13 @@
 		"factoryName": {
 			"value": "df-bi-ewa"
 		},
+		"CSS Production_connectionString": {
+			"value": ""
+		},
 		"CSS_connectionString": {
+			"value": ""
+		},
+		"DDI_connectionString": {
 			"value": ""
 		},
 		"EWA_Staging_connectionString": {

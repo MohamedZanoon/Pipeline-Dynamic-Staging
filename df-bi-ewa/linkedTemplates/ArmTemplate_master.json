@@ -7,9 +7,17 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "df-bi-ewa"
 		},
+		"CSS Production_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CSS Production'"
+		},
 		"CSS_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CSS'"
+		},
+		"DDI_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DDI'"
 		},
 		"EWA_Staging_connectionString": {
 			"type": "secureString",
@@ -49,8 +57,14 @@
 					"Staging Account_connectionString": {
 						"value": "[parameters('Staging Account_connectionString')]"
 					},
+					"CSS Production_connectionString": {
+						"value": "[parameters('CSS Production_connectionString')]"
+					},
 					"CSS_connectionString": {
 						"value": "[parameters('CSS_connectionString')]"
+					},
+					"DDI_connectionString": {
+						"value": "[parameters('DDI_connectionString')]"
 					},
 					"EWA_Staging_connectionString": {
 						"value": "[parameters('EWA_Staging_connectionString')]"
@@ -58,6 +72,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
 		}
 	]
 }
