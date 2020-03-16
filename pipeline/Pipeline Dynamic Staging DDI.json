@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE Database = 'DDI'\nORDER BY [Order]",
+						"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database] = 'DDI'\nORDER BY [Order]",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
