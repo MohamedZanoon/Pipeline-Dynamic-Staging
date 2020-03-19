@@ -737,46 +737,6 @@
 										]
 									},
 									{
-										"name": "Lookup Get Max Date",
-										"type": "Lookup",
-										"dependsOn": [
-											{
-												"activity": "Add Log Creating Staging File",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "SqlServerSource",
-												"sqlReaderStoredProcedureName": "[dbo].[sp_GetTableMaxDate]",
-												"storedProcedureParameters": {
-													"tablename": {
-														"type": "String",
-														"value": {
-															"value": "@item().TableNameDestination",
-															"type": "Expression"
-														}
-													}
-												},
-												"queryTimeout": "02:00:00"
-											},
-											"dataset": {
-												"referenceName": "GetMaxDate",
-												"type": "DatasetReference"
-											}
-										}
-									},
-									{
 										"name": "Add Query",
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [
@@ -838,7 +798,7 @@
 										"type": "SetVariable",
 										"dependsOn": [
 											{
-												"activity": "Lookup Get Max Date",
+												"activity": "Add Log Creating Staging File",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -848,7 +808,7 @@
 										"typeProperties": {
 											"variableName": "SourceQuery",
 											"value": {
-												"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', activity('Lookup Get Max Date').output.firstRow.MaxDate,''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
+												"value": "@concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource, ' WHERE EXTRACT(YEAR FROM REG_DATE) = ',pipeline().parameters.Year)",
 												"type": "Expression"
 											}
 										}
@@ -1257,8 +1217,8 @@
 		],
 		"parameters": {
 			"Year": {
-				"type": "int",
-				"defaultValue": 2009
+				"type": "string",
+				"defaultValue": "2009"
 			}
 		},
 		"variables": {
