@@ -1219,6 +1219,10 @@
 			"Year": {
 				"type": "string",
 				"defaultValue": "2009"
+			},
+			"Month": {
+				"type": "string",
+				"defaultValue": "1"
 			}
 		},
 		"variables": {
