@@ -831,6 +831,44 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SourceDDI')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DDI",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TableNameSource": {
+						"type": "string"
+					},
+					"TableSchemaSource": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "01 - Sources"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().TableSchemaSource",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableNameSource",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DDI')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SourceTables')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -903,6 +941,27 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/CSS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TableSourceSchemaDDI')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DDI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "01 - Sources"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DDI')]"
 			]
 		},
 		{
@@ -988,65 +1047,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Staging')]",
 				"[concat(variables('factoryId'), '/datasets/StagingWithoutFileName')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SourceDDI')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "DDI",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"TableNameSource": {
-						"type": "string"
-					},
-					"TableSchemaSource": {
-						"type": "string"
-					}
-				},
-				"folder": {
-					"name": "01 - Sources"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": {
-						"value": "@dataset().TableSchemaSource",
-						"type": "Expression"
-					},
-					"table": {
-						"value": "@dataset().TableNameSource",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/DDI')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TableSourceSchemaDDI')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "DDI",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "01 - Sources"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/DDI')]"
 			]
 		}
 	]
