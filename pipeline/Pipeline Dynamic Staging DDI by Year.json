@@ -156,7 +156,7 @@
 									},
 									"StartFrom": {
 										"value": {
-											"value": "@activity('Lookup Get Max Date').output.firstRow.MaxDate",
+											"value": "@utcnow()",
 											"type": "Expression"
 										},
 										"type": "Datetime"
