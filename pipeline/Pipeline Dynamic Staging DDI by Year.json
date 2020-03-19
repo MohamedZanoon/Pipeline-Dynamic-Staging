@@ -808,7 +808,7 @@
 										"typeProperties": {
 											"variableName": "SourceQuery",
 											"value": {
-												"value": "@concat('SELECT USER_CODE\n      ,DDI_REF\n      ,CUST_ACC\n      ,BANK_ACC\n      ,COD_AGENCIA\n      ,COD_SUCURSAL\n      ,IMP_LIMITE_DOMIC\n      ,FIRST_PAYMENT_DATE\n      ,DIA_VCTO_ANTICIPOS\n      ,DD_STATUS\n      ,REG_DATE\n      ,SIG_DATE\n      ,SENT_DATE\n      ,APP_DATE\n      ,REJ_DATE\n      ,REJ_CODE\n      ,CAN_DATE\n      ,REPLACE( BANK_ACC_NAME,''\\'','''') BANK_ACC_NAME\n      ,APPLICANT_CPR\n      ,REPLACE( APPLICANT_NAME,''\\'','''') APPLICANT_NAME\n      ,AVG_BILL\n      ,OS_AMOUNT\n      ,MIN_PAYMENT\n      ,DD_MONTHS\n      ,DD_REMARKS FROM ',item().TableSchemaSource,'.',item().TableNameSource, ' WHERE EXTRACT(YEAR FROM REG_DATE) = ',pipeline().parameters.Year)",
+												"value": "@concat('SELECT USER_CODE\n      ,DDI_REF\n      ,CUST_ACC\n      ,BANK_ACC\n      ,COD_AGENCIA\n      ,COD_SUCURSAL\n      ,IMP_LIMITE_DOMIC\n      ,FIRST_PAYMENT_DATE\n      ,DIA_VCTO_ANTICIPOS\n      ,DD_STATUS\n      ,REG_DATE\n      ,SIG_DATE\n      ,SENT_DATE\n      ,APP_DATE\n      ,REJ_DATE\n      ,REJ_CODE\n      ,CAN_DATE\n      ,REPLACE( BANK_ACC_NAME,''\\'','''') BANK_ACC_NAME\n      ,APPLICANT_CPR\n      ,REPLACE( APPLICANT_NAME,''\\'','''') APPLICANT_NAME\n      ,AVG_BILL\n      ,OS_AMOUNT\n      ,MIN_PAYMENT\n      ,DD_MONTHS\n      ,DD_REMARKS FROM ',item().TableSchemaSource,'.',item().TableNameSource, ' WHERE EXTRACT(YEAR FROM REG_DATE) = ',pipeline().parameters.Year,' AND EXTRACT(MONTH FROM REG_DATE) = ',pipeline().parameters.Month,' AND EXTRACT(DAY FROM REG_DATE) >= ',pipeline().parameters.DayFrom,' AND EXTRACT(DAY FROM REG_DATE) <= ',pipeline().parameters.DayTo)",
 												"type": "Expression"
 											}
 										}
@@ -1223,6 +1223,14 @@
 			"Month": {
 				"type": "string",
 				"defaultValue": "1"
+			},
+			"DayFrom": {
+				"type": "string",
+				"defaultValue": "1"
+			},
+			"DayTo": {
+				"type": "string",
+				"defaultValue": "10"
 			}
 		},
 		"variables": {
