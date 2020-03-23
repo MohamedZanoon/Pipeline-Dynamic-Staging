@@ -715,18 +715,8 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "Source",
-												"type": "DatasetReference",
-												"parameters": {
-													"TableNameSource": {
-														"value": "@item().TableNameSource",
-														"type": "Expression"
-													},
-													"TableSchemaSource": {
-														"value": "@item().TableSchemaSource",
-														"type": "Expression"
-													}
-												}
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference"
 											}
 										],
 										"outputs": [
