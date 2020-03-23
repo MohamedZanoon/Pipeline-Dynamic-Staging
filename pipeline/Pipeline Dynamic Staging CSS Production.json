@@ -716,7 +716,11 @@
 										"inputs": [
 											{
 												"referenceName": "SourceProduction",
-												"type": "DatasetReference"
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "@item().TableNameSource",
+													"TableSchemaSource": "@item().TableSchemaSource"
+												}
 											}
 										],
 										"outputs": [
