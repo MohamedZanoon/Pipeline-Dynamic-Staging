@@ -1,0 +1,24 @@
+{
+	"name": "Everyaevery hour",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Pipeline Dynamic Staging CSS Custom",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 2,
+				"startTime": "2020-03-24T22:00:00.000Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
