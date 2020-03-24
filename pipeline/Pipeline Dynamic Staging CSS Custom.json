@@ -157,7 +157,7 @@
 									},
 									"StartFrom": {
 										"value": {
-											"value": "@activity('Get Max Year From Destination').output.firstRow.MaxYear",
+											"value": "@concat(activity('Get Max Year From Destination').output.firstRow.MaxYear,'-01-01')",
 											"type": "Expression"
 										},
 										"type": "Datetime"
