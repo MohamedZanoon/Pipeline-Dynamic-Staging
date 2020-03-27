@@ -923,17 +923,11 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "Source",
+												"referenceName": "SourceProduction",
 												"type": "DatasetReference",
 												"parameters": {
-													"TableNameSource": {
-														"value": "@item().TableNameSource",
-														"type": "Expression"
-													},
-													"TableSchemaSource": {
-														"value": "@item().TableSchemaSource",
-														"type": "Expression"
-													}
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
 												}
 											}
 										],
