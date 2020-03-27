@@ -1431,6 +1431,9 @@
 				"type": "String"
 			}
 		},
+		"folder": {
+			"name": "Production"
+		},
 		"annotations": []
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
