@@ -1206,7 +1206,7 @@
 												"type": "SetVariable",
 												"dependsOn": [
 													{
-														"activity": "Add Log Creating Staging File",
+														"activity": "Get Source Columns",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -1216,7 +1216,7 @@
 												"typeProperties": {
 													"variableName": "SourceQuery",
 													"value": {
-														"value": "@concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE EXTRACT(YEAR FROM F_ACTUAL)\n=',variables('Year') )",
+														"value": "@concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE EXTRACT(YEAR FROM F_ACTUAL)\n=',variables('Year') )",
 														"type": "Expression"
 													}
 												}
@@ -1312,6 +1312,44 @@
 												"linkedServiceName": {
 													"referenceName": "EWA_Staging",
 													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Get Source Columns",
+												"type": "Lookup",
+												"dependsOn": [
+													{
+														"activity": "Add Log Creating Staging File",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderStoredProcedureName": "[[dbo].[sp_GetSourceColumns]",
+														"storedProcedureParameters": {
+															"TableNameSource": {
+																"type": "String",
+																"value": "@item().TableNameSource"
+															}
+														},
+														"queryTimeout": "02:00:00"
+													},
+													"dataset": {
+														"referenceName": "GetMaxDate",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
 												}
 											}
 										]
@@ -2390,7 +2428,7 @@
 												"type": "Lookup",
 												"dependsOn": [
 													{
-														"activity": "Add Log Creating Staging File",
+														"activity": "Get Source Columns",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -2498,7 +2536,7 @@
 												"typeProperties": {
 													"variableName": "SourceQuery",
 													"value": {
-														"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', activity('Lookup Get Max Date').output.firstRow.MaxDate,''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
+														"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', activity('Lookup Get Max Date').output.firstRow.MaxDate,''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
 														"type": "Expression"
 													}
 												}
@@ -2594,6 +2632,44 @@
 												"linkedServiceName": {
 													"referenceName": "EWA_Staging",
 													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Get Source Columns",
+												"type": "Lookup",
+												"dependsOn": [
+													{
+														"activity": "Add Log Creating Staging File",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderStoredProcedureName": "[[dbo].[sp_GetSourceColumns]",
+														"storedProcedureParameters": {
+															"TableNameSource": {
+																"type": "String",
+																"value": "@item().TableNameSource"
+															}
+														},
+														"queryTimeout": "02:00:00"
+													},
+													"dataset": {
+														"referenceName": "GetMaxDate",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
 												}
 											}
 										]
@@ -4917,7 +4993,7 @@
 												"type": "Lookup",
 												"dependsOn": [
 													{
-														"activity": "Add Log Creating Staging File",
+														"activity": "Get Source Columns",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -5025,7 +5101,7 @@
 												"typeProperties": {
 													"variableName": "SourceQuery",
 													"value": {
-														"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', activity('Lookup Get Max Date').output.firstRow.MaxDate,''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
+														"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', activity('Lookup Get Max Date').output.firstRow.MaxDate,''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
 														"type": "Expression"
 													}
 												}
@@ -5121,6 +5197,44 @@
 												"linkedServiceName": {
 													"referenceName": "EWA_Staging",
 													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Get Source Columns",
+												"type": "Lookup",
+												"dependsOn": [
+													{
+														"activity": "Add Log Creating Staging File",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderStoredProcedureName": "[[dbo].[sp_GetSourceColumns]",
+														"storedProcedureParameters": {
+															"TableNameSource": {
+																"type": "String",
+																"value": "@item().TableNameSource"
+															}
+														},
+														"queryTimeout": "02:00:00"
+													},
+													"dataset": {
+														"referenceName": "GetMaxDate",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
 												}
 											}
 										]
@@ -6404,7 +6518,7 @@
 												"type": "Lookup",
 												"dependsOn": [
 													{
-														"activity": "Add Log Creating Staging File",
+														"activity": "Get Source Columns",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -6512,7 +6626,7 @@
 												"typeProperties": {
 													"variableName": "SourceQuery",
 													"value": {
-														"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', activity('Lookup Get Max Date').output.firstRow.MaxDate,''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
+														"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', split(activity('Lookup Get Max Date').output.firstRow.MaxDate,'T')[0],''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
 														"type": "Expression"
 													}
 												}
@@ -6608,6 +6722,44 @@
 												"linkedServiceName": {
 													"referenceName": "EWA_Staging",
 													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Get Source Columns",
+												"type": "Lookup",
+												"dependsOn": [
+													{
+														"activity": "Add Log Creating Staging File",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderStoredProcedureName": "[[dbo].[sp_GetSourceColumns]",
+														"storedProcedureParameters": {
+															"TableNameSource": {
+																"type": "String",
+																"value": "@item().TableNameSource"
+															}
+														},
+														"queryTimeout": "02:00:00"
+													},
+													"dataset": {
+														"referenceName": "GetMaxDate",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
 												}
 											}
 										]
@@ -7949,7 +8101,7 @@
 												"type": "SetVariable",
 												"dependsOn": [
 													{
-														"activity": "Add Log Creating Staging File",
+														"activity": "Get Source Columns",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -7959,7 +8111,7 @@
 												"typeProperties": {
 													"variableName": "SourceQuery",
 													"value": {
-														"value": "@concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE EXTRACT(YEAR FROM F_ACTUAL)\n=',variables('Year') )",
+														"value": "@concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,' FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE EXTRACT(YEAR FROM F_ACTUAL)\n=',variables('Year') )",
 														"type": "Expression"
 													}
 												}
@@ -8055,6 +8207,44 @@
 												"linkedServiceName": {
 													"referenceName": "EWA_Staging",
 													"type": "LinkedServiceReference"
+												}
+											},
+											{
+												"name": "Get Source Columns",
+												"type": "Lookup",
+												"dependsOn": [
+													{
+														"activity": "Add Log Creating Staging File",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderStoredProcedureName": "[[dbo].[sp_GetSourceColumns]",
+														"storedProcedureParameters": {
+															"TableNameSource": {
+																"type": "String",
+																"value": "@item().TableNameSource"
+															}
+														},
+														"queryTimeout": "02:00:00"
+													},
+													"dataset": {
+														"referenceName": "GetMaxDate",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
 												}
 											}
 										]
