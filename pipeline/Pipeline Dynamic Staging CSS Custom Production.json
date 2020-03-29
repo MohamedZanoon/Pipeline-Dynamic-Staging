@@ -292,7 +292,7 @@
 											"storedProcedureParameters": {
 												"Log": {
 													"value": {
-														"value": "@concat('Max Year in Destination',variables('Year') )",
+														"value": "@concat('Max Year in Destination ',variables('Year') )",
 														"type": "Expression"
 													},
 													"type": "String"
