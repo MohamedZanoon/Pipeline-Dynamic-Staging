@@ -848,7 +848,7 @@
 										"typeProperties": {
 											"variableName": "SourceQuery",
 											"value": {
-												"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', activity('Lookup Get Max Date').output.firstRow.MaxDate,''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
+												"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT * FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', split(activity('Lookup Get Max Date').output.firstRow.MaxDate,'T')[0],''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
 												"type": "Expression"
 											}
 										}
