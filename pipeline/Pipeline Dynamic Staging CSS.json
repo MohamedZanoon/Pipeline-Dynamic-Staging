@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nORDER BY [Order]",
+						"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database] = 'CSS'\nORDER BY [Order]",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
@@ -978,7 +978,10 @@
 												"storedProcedureParameters": {
 													"TableNameSource": {
 														"type": "String",
-														"value": "@item().TableNameSource"
+														"value": {
+															"value": "@item().TableNameSource",
+															"type": "Expression"
+														}
 													}
 												},
 												"queryTimeout": "02:00:00"
