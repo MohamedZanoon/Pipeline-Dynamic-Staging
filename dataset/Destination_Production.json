@@ -1,0 +1,292 @@
+{
+	"name": "Destination_Production",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EWA_Staging Production",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"TableNameDestination": {
+				"type": "string"
+			},
+			"TableSchemaDestination": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "03 - Destinations"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "USUARIO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "F_ACTUAL",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "PROGRAMA",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COD_CLI",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "APE1_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "APE2_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NOM_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TFNO_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COD_CALLE",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NUM_PUERTA",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "DUPLICADOR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CGV_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DOC_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TIP_DOC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CO_PAIS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TIP_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "F_ALTA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "F_BAJA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "NRH",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NRH_FAV",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NRH_PEN",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "FAX_CLI",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "PERS_CONTACTO",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "CO_COND_FISCAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SOUNDEX_AP1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SOUNDEX_AP2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "REF_DIR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CUALIF_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NUM_DEV_CHEQ",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "CANT_LETRAS_IMPAGAS",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NUM_FISCAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "APE1_CLI_UP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DATOS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COD_POST",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NIF",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TFNO2_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DATOS2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EST_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SPEC_SIGNAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "APE3_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "APE1_CLI_ARAB",
+				"type": "nvarchar"
+			},
+			{
+				"name": "APE2_CLI_ARAB",
+				"type": "nvarchar"
+			},
+			{
+				"name": "APE3_CLI_ARAB",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NOM_CLI_ARAB",
+				"type": "nvarchar"
+			},
+			{
+				"name": "APE1_CLI_ARAB_UP",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IND_CASH_ONLY",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "COD_RATING",
+				"type": "nvarchar"
+			},
+			{
+				"name": "F_RATING",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "PASSPORT_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "JOB_TITLE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NIF_WORK",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "F_BIRTH",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "TFNO3_CLI",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EMAIL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBSERVACIONES",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PASSWORD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "F_CASH_ONLY",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "EMAIL2",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().TableSchemaDestination",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().TableNameDestination",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
