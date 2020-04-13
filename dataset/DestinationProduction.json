@@ -1,5 +1,5 @@
 {
-	"name": "Destination_Production",
+	"name": "DestinationProduction",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "EWA_Staging Production",
