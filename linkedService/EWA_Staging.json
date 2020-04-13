@@ -5,11 +5,11 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=False;data source=PRDW01;initial catalog=EWA_Staging;user id=ewa-admin",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlYjZmNmMyZi0xOWIzLTRjY2YtYjYyMy04OGRmNTYzMjg2YWIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=False;data source=PRSQL01;initial catalog=EWA_Staging;user id=ewa-admin",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjOTc5Y2VhNS0zMDdiLTQ0MWItOWI3YS04Yjg2Mzk0MDY0ZjkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "EWA-PRDW01-IR",
+			"referenceName": "EWA-PRSQL01-IR",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
