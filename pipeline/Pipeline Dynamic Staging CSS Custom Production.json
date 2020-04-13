@@ -104,17 +104,11 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Destination",
+									"referenceName": "DestinationProduction",
 									"type": "DatasetReference",
 									"parameters": {
-										"TableNameDestination": {
-											"value": "@item().TableNameDestination",
-											"type": "Expression"
-										},
-										"TableSchemaDestination": {
-											"value": "@item().TableSchemaDestination",
-											"type": "Expression"
-										}
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
 									}
 								}
 							]
@@ -193,7 +187,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "EWA_Staging",
+								"referenceName": "EWA_Staging Production",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -812,7 +806,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "EWA_Staging",
+								"referenceName": "EWA_Staging Production",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -1271,7 +1265,7 @@
 											}
 										},
 										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
+											"referenceName": "EWA_Staging Production",
 											"type": "LinkedServiceReference"
 										}
 									}
