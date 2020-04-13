@@ -20,6 +20,9 @@
 		"Staging Account_connectionString": {
 			"value": ""
 		},
+		"EWA_Staging Production_connectionString": {
+			"value": ""
+		},
 		"containerUri": {
 			"value": ""
 		},

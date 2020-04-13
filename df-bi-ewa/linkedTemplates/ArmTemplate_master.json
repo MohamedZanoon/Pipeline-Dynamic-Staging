@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Staging Account'"
 		},
+		"EWA_Staging Production_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EWA_Staging Production'"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -68,6 +72,9 @@
 					},
 					"EWA_Staging_connectionString": {
 						"value": "[parameters('EWA_Staging_connectionString')]"
+					},
+					"EWA_Staging Production_connectionString": {
+						"value": "[parameters('EWA_Staging Production_connectionString')]"
 					}
 				}
 			},

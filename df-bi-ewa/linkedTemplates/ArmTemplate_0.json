@@ -26,6 +26,10 @@
 		"EWA_Staging_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'EWA_Staging'"
+		},
+		"EWA_Staging Production_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EWA_Staging Production'"
 		}
 	},
 	"variables": {
@@ -455,6 +459,25 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/EWA_Staging Production')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('EWA_Staging Production_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "EWA-PRDW01-IR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/EWA-PRDW01-IR')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Destination')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -869,6 +892,44 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SourceProduction')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CSS Production",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TableNameSource": {
+						"type": "string"
+					},
+					"TableSchemaSource": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "01 - Sources"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().TableSchemaSource",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableNameSource",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/CSS Production')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SourceTables')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -962,91 +1023,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/DDI')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TableSourceSchemaDestination')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "EWA_Staging",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "03 - Destinations"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "COLUMN_NAME",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DATA_TYPE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "DATA_LENGTH",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NULLABLE",
-						"type": "nvarchar"
-					},
-					{
-						"name": "COLUMN_ID",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Configuration.SourceTableSchema"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Data Flow Count')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Staging",
-								"type": "DatasetReference"
-							},
-							"name": "Source"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "StagingWithoutFileName",
-								"type": "DatasetReference"
-							},
-							"name": "Destination"
-						}
-					],
-					"transformations": [
-						{
-							"name": "Count"
-						}
-					],
-					"script": "source(output(\n\t\tUSUARIO as string,\n\t\tF_ACTUAL as string,\n\t\tPROGRAMA as string,\n\t\tCOD_CLI as string,\n\t\tAPE1_CLI as string,\n\t\tAPE2_CLI as string,\n\t\tNOM_CLI as string,\n\t\tTFNO_CLI as string,\n\t\tCOD_CALLE as string,\n\t\tNUM_PUERTA as string,\n\t\tDUPLICADOR as string,\n\t\tCGV_CLI as string,\n\t\tDOC_ID as string,\n\t\tTIP_DOC as string,\n\t\tCO_PAIS as string,\n\t\tTIP_CLI as string,\n\t\tF_ALTA as string,\n\t\tF_BAJA as string,\n\t\tNRH as string,\n\t\tNRH_FAV as string,\n\t\tNRH_PEN as string,\n\t\tFAX_CLI as string,\n\t\tPERS_CONTACTO as string,\n\t\tCO_COND_FISCAL as string,\n\t\tSOUNDEX_AP1 as string,\n\t\tSOUNDEX_AP2 as string,\n\t\tREF_DIR as string,\n\t\tCUALIF_CLI as string,\n\t\tNUM_DEV_CHEQ as string,\n\t\tCANT_LETRAS_IMPAGAS as string,\n\t\tNUM_FISCAL as string,\n\t\tAPE1_CLI_UP as string,\n\t\tDATOS as string,\n\t\tCOD_POST as string,\n\t\tNIF as string,\n\t\tTFNO2_CLI as string,\n\t\tDATOS2 as string,\n\t\tEST_CLI as string,\n\t\tSPEC_SIGNAL as string,\n\t\tAPE3_CLI as string,\n\t\tAPE1_CLI_ARAB as string,\n\t\tAPE2_CLI_ARAB as string,\n\t\tAPE3_CLI_ARAB as string,\n\t\tNOM_CLI_ARAB as string,\n\t\tAPE1_CLI_ARAB_UP as string,\n\t\tIND_CASH_ONLY as string,\n\t\tCOD_RATING as string,\n\t\tF_RATING as string,\n\t\tPASSPORT_NO as string,\n\t\tJOB_TITLE as string,\n\t\tNIF_WORK as string,\n\t\tF_BIRTH as string,\n\t\tTFNO3_CLI as string,\n\t\tEMAIL as string,\n\t\tOBSERVACIONES as string,\n\t\tPASSWORD as string,\n\t\tF_CASH_ONLY as string,\n\t\tEMAIL2 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Source\nSource aggregate(groupBy(PASSWORD),\n\tCount = count()) ~> Count\nCount sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CountImp'],\n\tpartitionBy('hash', 1)) ~> Destination"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Staging')]",
-				"[concat(variables('factoryId'), '/datasets/StagingWithoutFileName')]"
 			]
 		}
 	]
