@@ -1,0 +1,16 @@
+{
+	"name": "IsDestinationTableExistsProduction",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EWA_Staging Production",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "00-Configuration"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
