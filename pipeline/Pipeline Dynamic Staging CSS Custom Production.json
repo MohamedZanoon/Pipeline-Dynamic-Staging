@@ -25,11 +25,11 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nORDER BY [Order]",
+						"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database] = 'CSS'\nORDER BY [Order]",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
-						"referenceName": "SourceTables",
+						"referenceName": "SourceTablesProduction",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -1294,6 +1294,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_AddLog]",
 					"storedProcedureParameters": {
 						"Log": {
 							"value": {
@@ -1363,7 +1364,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "EWA_Staging",
+					"referenceName": "EWA_Staging Production",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1387,6 +1388,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_AddLog]",
 					"storedProcedureParameters": {
 						"Log": {
 							"value": {
@@ -1456,7 +1458,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "EWA_Staging",
+					"referenceName": "EWA_Staging Production",
 					"type": "LinkedServiceReference"
 				}
 			}
