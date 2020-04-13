@@ -3242,7 +3242,7 @@
 										},
 										"sink": {
 											"type": "SqlServerSink",
-											"writeBatchSize": 10
+											"writeBatchTimeout": "03:00:00"
 										},
 										"enableStaging": false
 									},
@@ -4569,7 +4569,7 @@
 										},
 										"sink": {
 											"type": "SqlServerSink",
-											"writeBatchSize": 10
+											"writeBatchTimeout": "03:00:00"
 										},
 										"enableStaging": false
 									},
