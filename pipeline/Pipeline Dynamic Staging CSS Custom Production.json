@@ -243,7 +243,7 @@
 												"queryTimeout": "02:00:00"
 											},
 											"dataset": {
-												"referenceName": "GetMaxDate",
+												"referenceName": "GetMaxDateProduction",
 												"type": "DatasetReference"
 											}
 										}
@@ -314,7 +314,7 @@
 											}
 										},
 										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
+											"referenceName": "EWA_Staging Production",
 											"type": "LinkedServiceReference"
 										}
 									}
