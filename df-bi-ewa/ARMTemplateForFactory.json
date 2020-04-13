@@ -4507,7 +4507,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nORDER BY [Order]",
+								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database] = 'CSS'\nORDER BY [Order]",
 								"queryTimeout": "02:00:00"
 							},
 							"dataset": {
@@ -9603,12 +9603,12 @@
 					"connectionString": "[parameters('EWA_Staging_connectionString')]"
 				},
 				"connectVia": {
-					"referenceName": "EWA-PRDW01-IR",
+					"referenceName": "EWA-PRSQL01-IR",
 					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/EWA-PRDW01-IR')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/EWA-PRSQL01-IR')]"
 			]
 		},
 		{

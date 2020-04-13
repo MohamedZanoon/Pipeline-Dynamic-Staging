@@ -450,12 +450,12 @@
 					"connectionString": "[parameters('EWA_Staging_connectionString')]"
 				},
 				"connectVia": {
-					"referenceName": "EWA-PRDW01-IR",
+					"referenceName": "EWA-PRSQL01-IR",
 					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/EWA-PRDW01-IR')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/EWA-PRSQL01-IR')]"
 			]
 		},
 		{
