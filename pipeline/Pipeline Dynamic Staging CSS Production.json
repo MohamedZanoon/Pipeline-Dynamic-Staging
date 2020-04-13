@@ -24,11 +24,11 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nORDER BY [Order]",
+						"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database]='CSS'\nORDER BY [Order]",
 						"queryTimeout": "02:00:00"
 					},
 					"dataset": {
-						"referenceName": "SourceTables",
+						"referenceName": "SourceTablesProduction",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -103,17 +103,11 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Destination",
+									"referenceName": "DestinationProduction",
 									"type": "DatasetReference",
 									"parameters": {
-										"TableNameDestination": {
-											"value": "@item().TableNameDestination",
-											"type": "Expression"
-										},
-										"TableSchemaDestination": {
-											"value": "@item().TableSchemaDestination",
-											"type": "Expression"
-										}
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
 									}
 								}
 							]
@@ -192,7 +186,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "EWA_Staging",
+								"referenceName": "EWA_Staging Production",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -317,7 +311,7 @@
 										],
 										"outputs": [
 											{
-												"referenceName": "TableSourceSchemaDestination",
+												"referenceName": "TableSourceSchemaDestinationProduction",
 												"type": "DatasetReference"
 											}
 										]
@@ -361,7 +355,7 @@
 											}
 										},
 										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
+											"referenceName": "EWA_Staging Production",
 											"type": "LinkedServiceReference"
 										}
 									},
@@ -411,7 +405,7 @@
 											}
 										},
 										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
+											"referenceName": "EWA_Staging Production",
 											"type": "LinkedServiceReference"
 										}
 									}
@@ -460,7 +454,7 @@
 									"queryTimeout": "02:00:00"
 								},
 								"dataset": {
-									"referenceName": "IsDestinationTableExists",
+									"referenceName": "IsDestinationTableExistsProduction",
 									"type": "DatasetReference"
 								}
 							}
@@ -504,7 +498,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "EWA_Staging",
+								"referenceName": "EWA_Staging Production",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -554,7 +548,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "EWA_Staging",
+								"referenceName": "EWA_Staging Production",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -604,7 +598,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "EWA_Staging",
+								"referenceName": "EWA_Staging Production",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -665,7 +659,7 @@
 											}
 										},
 										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
+											"referenceName": "EWA_Staging Production",
 											"type": "LinkedServiceReference"
 										}
 									}
@@ -771,7 +765,7 @@
 												"queryTimeout": "02:00:00"
 											},
 											"dataset": {
-												"referenceName": "GetMaxDate",
+												"referenceName": "GetMaxDateProduction",
 												"type": "DatasetReference"
 											}
 										}
@@ -829,7 +823,7 @@
 											}
 										},
 										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
+											"referenceName": "EWA_Staging Production",
 											"type": "LinkedServiceReference"
 										}
 									},
@@ -899,7 +893,7 @@
 											}
 										},
 										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
+											"referenceName": "EWA_Staging Production",
 											"type": "LinkedServiceReference"
 										}
 									},
@@ -942,7 +936,7 @@
 											}
 										},
 										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
+											"referenceName": "EWA_Staging Production",
 											"type": "LinkedServiceReference"
 										}
 									},
@@ -981,7 +975,7 @@
 												"queryTimeout": "02:00:00"
 											},
 											"dataset": {
-												"referenceName": "GetMaxDate",
+												"referenceName": "GetMaxDateProduction",
 												"type": "DatasetReference"
 											}
 										}
@@ -1035,7 +1029,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "EWA_Staging",
+								"referenceName": "EWA_Staging Production",
 								"type": "LinkedServiceReference"
 							}
 						},
@@ -1103,7 +1097,7 @@
 											}
 										},
 										"linkedServiceName": {
-											"referenceName": "EWA_Staging",
+											"referenceName": "EWA_Staging Production",
 											"type": "LinkedServiceReference"
 										}
 									}
@@ -1149,7 +1143,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "EWA_Staging",
+					"referenceName": "EWA_Staging Production",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1196,7 +1190,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "EWA_Staging",
+					"referenceName": "EWA_Staging Production",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1243,7 +1237,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "EWA_Staging",
+					"referenceName": "EWA_Staging Production",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -1290,7 +1284,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "EWA_Staging",
+					"referenceName": "EWA_Staging Production",
 					"type": "LinkedServiceReference"
 				}
 			}
