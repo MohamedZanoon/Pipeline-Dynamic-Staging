@@ -842,7 +842,7 @@
 										"typeProperties": {
 											"variableName": "SourceQuery",
 											"value": {
-												"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', split(activity('Lookup Get Max Date').output.firstRow.MaxDate,'T')[0],''', ''yyyy-mm-dd hh24:mi:ss'' )'))",
+												"value": "@if(empty( activity('Lookup Get Max Date').output.firstRow.MaxDate),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource),if(endswith(item().TableNameSource,'SMS_MESSAGES'),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE SMS_PROCESSED_DATE IS NULL OR SMS_PROCESSED_DATE >= TO_DATE( ''', split(activity('Lookup Get Max Date').output.firstRow.MaxDate,'T')[0],''', ''yyyy-mm-dd hh24:mi:ss'' )'),concat('SELECT ',activity('Get Source Columns').output.firstRow.Columns,'  FROM ',item().TableSchemaSource,'.',item().TableNameSource,' WHERE F_ACTUAL >= TO_DATE( ''', split(activity('Lookup Get Max Date').output.firstRow.MaxDate,'T')[0],''', ''yyyy-mm-dd hh24:mi:ss'' )')))",
 												"type": "Expression"
 											}
 										}
