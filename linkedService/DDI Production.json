@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "Oracle",
 		"typeProperties": {
-			"connectionString": "host=10.39.212.209;port=1521;sid=DDIPRO;user id=BI_MOHD",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0YzMwNjQ5My1jZThiLTQwZjEtOWY5OS1lMmE2ZTFhM2UwMjUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "host=10.39.212.221;port=1521;sid=DDIPRO;user id=BI_MOHD",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkMTJjMmRhNC1lZTg0LTRmZjAtYmJmZi0xYTkzZmYyNTdmY2UiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "IGA-IR",
