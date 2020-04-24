@@ -1237,7 +1237,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =2')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1272,7 +1272,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-02')",
 														"type": "Expression"
 													}
 												}
@@ -1302,7 +1302,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =3')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1337,7 +1337,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-03')",
 														"type": "Expression"
 													}
 												}
@@ -1367,7 +1367,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =6')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1402,7 +1402,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-06')",
 														"type": "Expression"
 													}
 												}
@@ -1432,7 +1432,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =4')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1467,7 +1467,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-04')",
 														"type": "Expression"
 													}
 												}
@@ -1497,7 +1497,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =5')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1532,7 +1532,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-05')",
 														"type": "Expression"
 													}
 												}
@@ -1562,7 +1562,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =7')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1597,7 +1597,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-07')",
 														"type": "Expression"
 													}
 												}
@@ -1627,7 +1627,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =12')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1662,7 +1662,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-12')",
 														"type": "Expression"
 													}
 												}
@@ -1692,7 +1692,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =11')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1727,7 +1727,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-11')",
 														"type": "Expression"
 													}
 												}
@@ -1757,7 +1757,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =10')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1792,7 +1792,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-10')",
 														"type": "Expression"
 													}
 												}
@@ -1822,7 +1822,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =9')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1857,7 +1857,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-09')",
 														"type": "Expression"
 													}
 												}
@@ -1887,7 +1887,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =8')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1922,7 +1922,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-08')",
 														"type": "Expression"
 													}
 												}
