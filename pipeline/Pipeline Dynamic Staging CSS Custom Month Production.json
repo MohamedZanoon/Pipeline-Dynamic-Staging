@@ -55,7 +55,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Staging File to SQL Destination 01",
+							"name": "Staging File to SQL Destination Q1",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -96,7 +96,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"FileNameStaging": {
-											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-Q1')",
 											"type": "Expression"
 										}
 									}
@@ -118,25 +118,25 @@
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
-									"activity": "Staging File to SQL Destination 01",
+									"activity": "Staging File to SQL Destination Q1",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 02",
+									"activity": "Staging File to SQL Destination Q2",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 03",
+									"activity": "Staging File to SQL Destination Q3",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 04",
+									"activity": "Staging File to SQL Destination Q4",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -1504,7 +1504,7 @@
 							}
 						},
 						{
-							"name": "Staging File to SQL Destination 03",
+							"name": "Staging File to SQL Destination Q3",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -1545,7 +1545,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"FileNameStaging": {
-											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-03')",
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-Q3')",
 											"type": "Expression"
 										}
 									}
@@ -1563,7 +1563,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 04",
+							"name": "Staging File to SQL Destination Q4",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -1604,7 +1604,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"FileNameStaging": {
-											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-04')",
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-Q4')",
 											"type": "Expression"
 										}
 									}
@@ -1622,7 +1622,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 02",
+							"name": "Staging File to SQL Destination Q2",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -1663,7 +1663,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"FileNameStaging": {
-											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-02')",
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-Q2')",
 											"type": "Expression"
 										}
 									}
