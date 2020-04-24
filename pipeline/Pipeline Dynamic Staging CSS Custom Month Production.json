@@ -122,6 +122,72 @@
 									"dependencyConditions": [
 										"Succeeded"
 									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy3",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy3_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy3_copy2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy2_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy2_copy2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy1_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy1_copy2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy4",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Staging File to SQL Destination 01_copy5",
+									"dependencyConditions": [
+										"Succeeded"
+									]
 								}
 							],
 							"policy": {
@@ -2052,6 +2118,655 @@
 									}
 								]
 							}
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy2",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy3",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy4",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy1_copy1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy2_copy1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy3_copy1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy5",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy1_copy2",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy2_copy2",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
+						},
+						{
+							"name": "Staging File to SQL Destination 01_copy3_copy2",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Staging File not Exists",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBatchTimeout": "03:00:00"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "Staging",
+									"type": "DatasetReference",
+									"parameters": {
+										"FileNameStaging": {
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationProduction",
+									"type": "DatasetReference",
+									"parameters": {
+										"TableNameDestination": "@item().TableNameDestination",
+										"TableSchemaDestination": "@item().TableSchemaDestination"
+									}
+								}
+							]
 						}
 					]
 				}
