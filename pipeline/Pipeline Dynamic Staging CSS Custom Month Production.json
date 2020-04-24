@@ -940,7 +940,7 @@
 								],
 								"ifTrueActivities": [
 									{
-										"name": "Oracle Source to Staging File 01",
+										"name": "Oracle Source to Staging File Q1",
 										"type": "Copy",
 										"dependsOn": [
 											{
@@ -962,7 +962,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) IN (1,2,3)')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -997,7 +997,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-Q1')",
 														"type": "Expression"
 													}
 												}
@@ -1086,73 +1086,25 @@
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [
 											{
-												"activity": "Oracle Source to Staging File 01",
+												"activity": "Oracle Source to Staging File Q1",
 												"dependencyConditions": [
 													"Succeeded"
 												]
 											},
 											{
-												"activity": "Oracle Source to Staging File 02",
+												"activity": "Oracle Source to Staging File Q2",
 												"dependencyConditions": [
 													"Succeeded"
 												]
 											},
 											{
-												"activity": "Oracle Source to Staging File 04",
+												"activity": "Oracle Source to Staging File Q4",
 												"dependencyConditions": [
 													"Succeeded"
 												]
 											},
 											{
-												"activity": "Oracle Source to Staging File 05",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											},
-											{
-												"activity": "Oracle Source to Staging File 03",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											},
-											{
-												"activity": "Oracle Source to Staging File 06",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											},
-											{
-												"activity": "Oracle Source to Staging File 07",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											},
-											{
-												"activity": "Oracle Source to Staging File 08",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											},
-											{
-												"activity": "Oracle Source to Staging File 09",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											},
-											{
-												"activity": "Oracle Source to Staging File 10",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											},
-											{
-												"activity": "Oracle Source to Staging File 11",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											},
-											{
-												"activity": "Oracle Source to Staging File 12",
+												"activity": "Oracle Source to Staging File Q3",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -1281,7 +1233,7 @@
 										}
 									},
 									{
-										"name": "Oracle Source to Staging File 02",
+										"name": "Oracle Source to Staging File Q2",
 										"type": "Copy",
 										"dependsOn": [
 											{
@@ -1303,7 +1255,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =2')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL)  IN (4,5,6)')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1338,7 +1290,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-02')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-Q2')",
 														"type": "Expression"
 													}
 												}
@@ -1346,7 +1298,7 @@
 										]
 									},
 									{
-										"name": "Oracle Source to Staging File 03",
+										"name": "Oracle Source to Staging File Q3",
 										"type": "Copy",
 										"dependsOn": [
 											{
@@ -1368,7 +1320,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =3')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL)  IN (7,8,9)')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1403,7 +1355,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-03')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-Q3')",
 														"type": "Expression"
 													}
 												}
@@ -1411,7 +1363,7 @@
 										]
 									},
 									{
-										"name": "Oracle Source to Staging File 06",
+										"name": "Oracle Source to Staging File Q4",
 										"type": "Copy",
 										"dependsOn": [
 											{
@@ -1433,7 +1385,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =6')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL)  IN (10,11,12)')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -1468,527 +1420,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-06')",
-														"type": "Expression"
-													}
-												}
-											}
-										]
-									},
-									{
-										"name": "Oracle Source to Staging File 04",
-										"type": "Copy",
-										"dependsOn": [
-											{
-												"activity": "Add Query",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "OracleSource",
-												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =4')",
-													"type": "Expression"
-												},
-												"partitionOption": "None",
-												"queryTimeout": "02:00:00"
-											},
-											"sink": {
-												"type": "DelimitedTextSink",
-												"storeSettings": {
-													"type": "AzureBlobStorageWriteSettings"
-												},
-												"formatSettings": {
-													"type": "DelimitedTextWriteSettings",
-													"quoteAllText": true,
-													"fileExtension": ".txt"
-												}
-											},
-											"enableStaging": false
-										},
-										"inputs": [
-											{
-												"referenceName": "SourceProduction",
-												"type": "DatasetReference",
-												"parameters": {
-													"TableNameSource": "item().TableNameSource",
-													"TableSchemaSource": "item().TableSchemaSource"
-												}
-											}
-										],
-										"outputs": [
-											{
-												"referenceName": "Staging",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-04')",
-														"type": "Expression"
-													}
-												}
-											}
-										]
-									},
-									{
-										"name": "Oracle Source to Staging File 05",
-										"type": "Copy",
-										"dependsOn": [
-											{
-												"activity": "Add Query",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "OracleSource",
-												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =5')",
-													"type": "Expression"
-												},
-												"partitionOption": "None",
-												"queryTimeout": "02:00:00"
-											},
-											"sink": {
-												"type": "DelimitedTextSink",
-												"storeSettings": {
-													"type": "AzureBlobStorageWriteSettings"
-												},
-												"formatSettings": {
-													"type": "DelimitedTextWriteSettings",
-													"quoteAllText": true,
-													"fileExtension": ".txt"
-												}
-											},
-											"enableStaging": false
-										},
-										"inputs": [
-											{
-												"referenceName": "SourceProduction",
-												"type": "DatasetReference",
-												"parameters": {
-													"TableNameSource": "item().TableNameSource",
-													"TableSchemaSource": "item().TableSchemaSource"
-												}
-											}
-										],
-										"outputs": [
-											{
-												"referenceName": "Staging",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-05')",
-														"type": "Expression"
-													}
-												}
-											}
-										]
-									},
-									{
-										"name": "Oracle Source to Staging File 07",
-										"type": "Copy",
-										"dependsOn": [
-											{
-												"activity": "Add Query",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "OracleSource",
-												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =7')",
-													"type": "Expression"
-												},
-												"partitionOption": "None",
-												"queryTimeout": "02:00:00"
-											},
-											"sink": {
-												"type": "DelimitedTextSink",
-												"storeSettings": {
-													"type": "AzureBlobStorageWriteSettings"
-												},
-												"formatSettings": {
-													"type": "DelimitedTextWriteSettings",
-													"quoteAllText": true,
-													"fileExtension": ".txt"
-												}
-											},
-											"enableStaging": false
-										},
-										"inputs": [
-											{
-												"referenceName": "SourceProduction",
-												"type": "DatasetReference",
-												"parameters": {
-													"TableNameSource": "item().TableNameSource",
-													"TableSchemaSource": "item().TableSchemaSource"
-												}
-											}
-										],
-										"outputs": [
-											{
-												"referenceName": "Staging",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-07')",
-														"type": "Expression"
-													}
-												}
-											}
-										]
-									},
-									{
-										"name": "Oracle Source to Staging File 12",
-										"type": "Copy",
-										"dependsOn": [
-											{
-												"activity": "Add Query",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "OracleSource",
-												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =12')",
-													"type": "Expression"
-												},
-												"partitionOption": "None",
-												"queryTimeout": "02:00:00"
-											},
-											"sink": {
-												"type": "DelimitedTextSink",
-												"storeSettings": {
-													"type": "AzureBlobStorageWriteSettings"
-												},
-												"formatSettings": {
-													"type": "DelimitedTextWriteSettings",
-													"quoteAllText": true,
-													"fileExtension": ".txt"
-												}
-											},
-											"enableStaging": false
-										},
-										"inputs": [
-											{
-												"referenceName": "SourceProduction",
-												"type": "DatasetReference",
-												"parameters": {
-													"TableNameSource": "item().TableNameSource",
-													"TableSchemaSource": "item().TableSchemaSource"
-												}
-											}
-										],
-										"outputs": [
-											{
-												"referenceName": "Staging",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-12')",
-														"type": "Expression"
-													}
-												}
-											}
-										]
-									},
-									{
-										"name": "Oracle Source to Staging File 11",
-										"type": "Copy",
-										"dependsOn": [
-											{
-												"activity": "Add Query",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "OracleSource",
-												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =11')",
-													"type": "Expression"
-												},
-												"partitionOption": "None",
-												"queryTimeout": "02:00:00"
-											},
-											"sink": {
-												"type": "DelimitedTextSink",
-												"storeSettings": {
-													"type": "AzureBlobStorageWriteSettings"
-												},
-												"formatSettings": {
-													"type": "DelimitedTextWriteSettings",
-													"quoteAllText": true,
-													"fileExtension": ".txt"
-												}
-											},
-											"enableStaging": false
-										},
-										"inputs": [
-											{
-												"referenceName": "SourceProduction",
-												"type": "DatasetReference",
-												"parameters": {
-													"TableNameSource": "item().TableNameSource",
-													"TableSchemaSource": "item().TableSchemaSource"
-												}
-											}
-										],
-										"outputs": [
-											{
-												"referenceName": "Staging",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-11')",
-														"type": "Expression"
-													}
-												}
-											}
-										]
-									},
-									{
-										"name": "Oracle Source to Staging File 10",
-										"type": "Copy",
-										"dependsOn": [
-											{
-												"activity": "Add Query",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "OracleSource",
-												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =10')",
-													"type": "Expression"
-												},
-												"partitionOption": "None",
-												"queryTimeout": "02:00:00"
-											},
-											"sink": {
-												"type": "DelimitedTextSink",
-												"storeSettings": {
-													"type": "AzureBlobStorageWriteSettings"
-												},
-												"formatSettings": {
-													"type": "DelimitedTextWriteSettings",
-													"quoteAllText": true,
-													"fileExtension": ".txt"
-												}
-											},
-											"enableStaging": false
-										},
-										"inputs": [
-											{
-												"referenceName": "SourceProduction",
-												"type": "DatasetReference",
-												"parameters": {
-													"TableNameSource": "item().TableNameSource",
-													"TableSchemaSource": "item().TableSchemaSource"
-												}
-											}
-										],
-										"outputs": [
-											{
-												"referenceName": "Staging",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-10')",
-														"type": "Expression"
-													}
-												}
-											}
-										]
-									},
-									{
-										"name": "Oracle Source to Staging File 09",
-										"type": "Copy",
-										"dependsOn": [
-											{
-												"activity": "Add Query",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "OracleSource",
-												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =9')",
-													"type": "Expression"
-												},
-												"partitionOption": "None",
-												"queryTimeout": "02:00:00"
-											},
-											"sink": {
-												"type": "DelimitedTextSink",
-												"storeSettings": {
-													"type": "AzureBlobStorageWriteSettings"
-												},
-												"formatSettings": {
-													"type": "DelimitedTextWriteSettings",
-													"quoteAllText": true,
-													"fileExtension": ".txt"
-												}
-											},
-											"enableStaging": false
-										},
-										"inputs": [
-											{
-												"referenceName": "SourceProduction",
-												"type": "DatasetReference",
-												"parameters": {
-													"TableNameSource": "item().TableNameSource",
-													"TableSchemaSource": "item().TableSchemaSource"
-												}
-											}
-										],
-										"outputs": [
-											{
-												"referenceName": "Staging",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-09')",
-														"type": "Expression"
-													}
-												}
-											}
-										]
-									},
-									{
-										"name": "Oracle Source to Staging File 08",
-										"type": "Copy",
-										"dependsOn": [
-											{
-												"activity": "Add Query",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
-										"policy": {
-											"timeout": "7.00:00:00",
-											"retry": 0,
-											"retryIntervalInSeconds": 30,
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"source": {
-												"type": "OracleSource",
-												"oracleReaderQuery": {
-													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =8')",
-													"type": "Expression"
-												},
-												"partitionOption": "None",
-												"queryTimeout": "02:00:00"
-											},
-											"sink": {
-												"type": "DelimitedTextSink",
-												"storeSettings": {
-													"type": "AzureBlobStorageWriteSettings"
-												},
-												"formatSettings": {
-													"type": "DelimitedTextWriteSettings",
-													"quoteAllText": true,
-													"fileExtension": ".txt"
-												}
-											},
-											"enableStaging": false
-										},
-										"inputs": [
-											{
-												"referenceName": "SourceProduction",
-												"type": "DatasetReference",
-												"parameters": {
-													"TableNameSource": "item().TableNameSource",
-													"TableSchemaSource": "item().TableSchemaSource"
-												}
-											}
-										],
-										"outputs": [
-											{
-												"referenceName": "Staging",
-												"type": "DatasetReference",
-												"parameters": {
-													"FileNameStaging": {
-														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-08')",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-Q4')",
 														"type": "Expression"
 													}
 												}
