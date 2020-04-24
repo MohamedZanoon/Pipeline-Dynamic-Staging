@@ -155,14 +155,14 @@
 								"storedProcedureParameters": {
 									"DurationFirstCopy": {
 										"value": {
-											"value": "@if(item().IsStagingFileExists ,0,\nactivity('Oracle Source to Staging File Q1').output.copyDuration + activity('Oracle Source to Staging File Q2').output.copyDuration + activity('Oracle Source to Staging File Q3').output.copyDuration + activity('Oracle Source to Staging File Q4').output.copyDuration)",
+											"value": "@if(item().IsStagingFileExists ,0,\nadd(add(activity('Oracle Source to Staging File Q1').output.copyDuration, activity('Oracle Source to Staging File Q2').output.copyDuration),add( activity('Oracle Source to Staging File Q3').output.copyDuration, activity('Oracle Source to Staging File Q4').output.copyDuration)))",
 											"type": "Expression"
 										},
 										"type": "Int32"
 									},
 									"DurationSecondCopy": {
 										"value": {
-											"value": "@(activity('Staging File to SQL Destination Q1').output.copyDuration + activity('Staging File to SQL Destination Q2').output.copyDuration + activity('Staging File to SQL Destination Q3').output.copyDuration + activity('Staging File to SQL Destination Q4').output.copyDuration)",
+											"value": "@add(add(activity('Staging File to SQL Destination Q1').output.copyDuration,activity('Staging File to SQL Destination Q2').output.copyDuration),add(activity('Staging File to SQL Destination Q3').output.copyDuration,activity('Staging File to SQL Destination Q4').output.copyDuration))",
 											"type": "Expression"
 										},
 										"type": "Int32"
