@@ -124,67 +124,67 @@
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy3",
+									"activity": "Staging File to SQL Destination 02",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy1",
+									"activity": "Staging File to SQL Destination 03",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy2",
+									"activity": "Staging File to SQL Destination 04",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy3_copy1",
+									"activity": "Staging File to SQL Destination 05",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy3_copy2",
+									"activity": "Staging File to SQL Destination 06",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy2_copy1",
+									"activity": "Staging File to SQL Destination 07",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy2_copy2",
+									"activity": "Staging File to SQL Destination 08",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy1_copy1",
+									"activity": "Staging File to SQL Destination 09",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy1_copy2",
+									"activity": "Staging File to SQL Destination 10",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy4",
+									"activity": "Staging File to SQL Destination 11",
 									"dependencyConditions": [
 										"Succeeded"
 									]
 								},
 								{
-									"activity": "Staging File to SQL Destination 01_copy5",
+									"activity": "Staging File to SQL Destination 12",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -2120,7 +2120,7 @@
 							}
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy1",
+							"name": "Staging File to SQL Destination 03",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2179,7 +2179,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy2",
+							"name": "Staging File to SQL Destination 04",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2238,7 +2238,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy3",
+							"name": "Staging File to SQL Destination 02",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2297,7 +2297,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy4",
+							"name": "Staging File to SQL Destination 11",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2356,7 +2356,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy1_copy1",
+							"name": "Staging File to SQL Destination 09",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2415,7 +2415,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy2_copy1",
+							"name": "Staging File to SQL Destination 07",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2474,7 +2474,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy3_copy1",
+							"name": "Staging File to SQL Destination 05",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2533,7 +2533,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy5",
+							"name": "Staging File to SQL Destination 12",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2592,7 +2592,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy1_copy2",
+							"name": "Staging File to SQL Destination 10",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2651,7 +2651,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy2_copy2",
+							"name": "Staging File to SQL Destination 08",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -2710,7 +2710,7 @@
 							]
 						},
 						{
-							"name": "Staging File to SQL Destination 01_copy3_copy2",
+							"name": "Staging File to SQL Destination 06",
 							"type": "Copy",
 							"dependsOn": [
 								{
