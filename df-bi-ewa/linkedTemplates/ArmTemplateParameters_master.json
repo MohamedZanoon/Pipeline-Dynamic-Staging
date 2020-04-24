@@ -11,16 +11,19 @@
 		"CSS_connectionString": {
 			"value": ""
 		},
+		"DDI Production_connectionString": {
+			"value": ""
+		},
 		"DDI_connectionString": {
+			"value": ""
+		},
+		"EWA_Staging Production_connectionString": {
 			"value": ""
 		},
 		"EWA_Staging_connectionString": {
 			"value": ""
 		},
 		"Staging Account_connectionString": {
-			"value": ""
-		},
-		"EWA_Staging Production_connectionString": {
 			"value": ""
 		},
 		"containerUri": {

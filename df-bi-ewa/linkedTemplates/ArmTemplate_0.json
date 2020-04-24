@@ -19,17 +19,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CSS'"
 		},
+		"DDI Production_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DDI Production'"
+		},
 		"DDI_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DDI'"
 		},
-		"EWA_Staging_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'EWA_Staging'"
-		},
 		"EWA_Staging Production_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'EWA_Staging Production'"
+		},
+		"EWA_Staging_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EWA_Staging'"
 		}
 	},
 	"variables": {
@@ -421,6 +425,25 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DDI Production')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('DDI Production_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "IGA-IR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/IGA-IR')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DDI')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -440,25 +463,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/EWA_Staging')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('EWA_Staging_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "EWA-PRSQL01-IR",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/EWA-PRSQL01-IR')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/EWA_Staging Production')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -475,6 +479,25 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/EWA-PRDW01-IR')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EWA_Staging')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('EWA_Staging_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "EWA-PRSQL01-IR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/EWA-PRSQL01-IR')]"
 			]
 		},
 		{
@@ -774,6 +797,302 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DestinationProduction')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EWA_Staging Production",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"TableNameDestination": {
+						"type": "string"
+					},
+					"TableSchemaDestination": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "03 - Destinations"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "USUARIO",
+						"type": "nvarchar"
+					},
+					{
+						"name": "F_ACTUAL",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "PROGRAMA",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_CLI",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "APE1_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE2_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NOM_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TFNO_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_CALLE",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "NUM_PUERTA",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "DUPLICADOR",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CGV_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DOC_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TIP_DOC",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CO_PAIS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TIP_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "F_ALTA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "F_BAJA",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "NRH",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "NRH_FAV",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "NRH_PEN",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "FAX_CLI",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "PERS_CONTACTO",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "CO_COND_FISCAL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SOUNDEX_AP1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SOUNDEX_AP2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "REF_DIR",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CUALIF_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NUM_DEV_CHEQ",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "CANT_LETRAS_IMPAGAS",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "NUM_FISCAL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE1_CLI_UP",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DATOS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "COD_POST",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NIF",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "TFNO2_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "DATOS2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EST_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SPEC_SIGNAL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE3_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE1_CLI_ARAB",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE2_CLI_ARAB",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE3_CLI_ARAB",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NOM_CLI_ARAB",
+						"type": "nvarchar"
+					},
+					{
+						"name": "APE1_CLI_ARAB_UP",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IND_CASH_ONLY",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "COD_RATING",
+						"type": "nvarchar"
+					},
+					{
+						"name": "F_RATING",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "PASSPORT_NO",
+						"type": "nvarchar"
+					},
+					{
+						"name": "JOB_TITLE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NIF_WORK",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "F_BIRTH",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TFNO3_CLI",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EMAIL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OBSERVACIONES",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PASSWORD",
+						"type": "nvarchar"
+					},
+					{
+						"name": "F_CASH_ONLY",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "EMAIL2",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().TableSchemaDestination",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableNameDestination",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging Production')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GetMaxDate')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -795,6 +1114,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/GetMaxDateProduction')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EWA_Staging Production",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "00-Configuration"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging Production')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/IsDestinationTableExists')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -813,6 +1153,27 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IsDestinationTableExistsProduction')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EWA_Staging Production",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "00-Configuration"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging Production')]"
 			]
 		},
 		{
@@ -886,140 +1247,6 @@
 						"type": "Expression"
 					}
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/DDI')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SourceProduction')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CSS Production",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"TableNameSource": {
-						"type": "string"
-					},
-					"TableSchemaSource": {
-						"type": "string"
-					}
-				},
-				"folder": {
-					"name": "01 - Sources"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": {
-						"value": "@dataset().TableSchemaSource",
-						"type": "Expression"
-					},
-					"table": {
-						"value": "@dataset().TableNameSource",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CSS Production')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SourceTables')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "EWA_Staging",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "00-Configuration"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "TableSchemaSource",
-						"type": "nvarchar"
-					},
-					{
-						"name": "TableNameSource",
-						"type": "nvarchar"
-					},
-					{
-						"name": "FileNameStaging",
-						"type": "nvarchar"
-					},
-					{
-						"name": "TableSchemaDestination",
-						"type": "nvarchar"
-					},
-					{
-						"name": "TableNameDestination",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Order",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ProcessGUID",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "vw_Configuration.SourceTables"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/EWA_Staging')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TableSourceSchema')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CSS",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "01 - Sources"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CSS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TableSourceSchemaDDI')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "DDI",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "01 - Sources"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/DDI')]"
