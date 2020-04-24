@@ -55,7 +55,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Staging File to SQL Destination",
+							"name": "Staging File to SQL Destination 01",
 							"type": "Copy",
 							"dependsOn": [
 								{
@@ -96,7 +96,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"FileNameStaging": {
-											"value": "@item().FileNameStaging",
+											"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
 											"type": "Expression"
 										}
 									}
@@ -118,7 +118,7 @@
 							"type": "SqlServerStoredProcedure",
 							"dependsOn": [
 								{
-									"activity": "Staging File to SQL Destination",
+									"activity": "Staging File to SQL Destination 01",
 									"dependencyConditions": [
 										"Succeeded"
 									]
