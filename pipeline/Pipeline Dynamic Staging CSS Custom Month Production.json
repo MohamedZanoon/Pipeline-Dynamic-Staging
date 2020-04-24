@@ -874,7 +874,7 @@
 								],
 								"ifTrueActivities": [
 									{
-										"name": "Oracle Source to Staging File",
+										"name": "Oracle Source to Staging File 01",
 										"type": "Copy",
 										"dependsOn": [
 											{
@@ -896,7 +896,7 @@
 											"source": {
 												"type": "OracleSource",
 												"oracleReaderQuery": {
-													"value": "@variables('SourceQuery')",
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
 													"type": "Expression"
 												},
 												"partitionOption": "None",
@@ -931,7 +931,7 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"FileNameStaging": {
-														"value": "@item().FileNameStaging",
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
 														"type": "Expression"
 													}
 												}
@@ -1020,7 +1020,73 @@
 										"type": "SqlServerStoredProcedure",
 										"dependsOn": [
 											{
-												"activity": "Oracle Source to Staging File",
+												"activity": "Oracle Source to Staging File 01",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 02",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 04",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 05",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 03",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 06",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 07",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 08",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 09",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 10",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 11",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											},
+											{
+												"activity": "Oracle Source to Staging File 12",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -1147,6 +1213,721 @@
 												"type": "DatasetReference"
 											}
 										}
+									},
+									{
+										"name": "Oracle Source to Staging File 02",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 03",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 06",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 04",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 05",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 07",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 12",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 11",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 10",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 09",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Oracle Source to Staging File 08",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Add Query",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "OracleSource",
+												"oracleReaderQuery": {
+													"value": "@concat(variables('SourceQuery'),' AND EXTRACT(MONTH FROM F_ACTUAL) =1')",
+													"type": "Expression"
+												},
+												"partitionOption": "None",
+												"queryTimeout": "02:00:00"
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobStorageWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SourceProduction",
+												"type": "DatasetReference",
+												"parameters": {
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "Staging",
+												"type": "DatasetReference",
+												"parameters": {
+													"FileNameStaging": {
+														"value": "@concat(item().FileNameStaging,'-',variables('Year'),'-01')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
 									}
 								]
 							}
