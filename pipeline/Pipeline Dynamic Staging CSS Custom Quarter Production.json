@@ -1,7 +1,7 @@
 {
 	"name": "Pipeline Dynamic Staging CSS Custom Quarter Production",
 	"properties": {
-		"description": "Get Data By Year and Month",
+		"description": "Get Data By Year and Quarter",
 		"activities": [
 			{
 				"name": "Lookup Source Tables",
