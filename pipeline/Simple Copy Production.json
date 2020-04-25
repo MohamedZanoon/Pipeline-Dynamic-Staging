@@ -1,0 +1,56 @@
+{
+	"name": "Simple Copy Production",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Staging",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileNameStaging": "Imprimir_Datos-2007-Q1.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationProduction",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableNameDestination": "Imprimir_Datos",
+							"TableSchemaDestination": "dbo"
+						}
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
