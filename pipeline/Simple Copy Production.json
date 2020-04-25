@@ -35,7 +35,7 @@
 						"referenceName": "Staging",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileNameStaging": "Imprimir_Datos-2007-Q1.csv"
+							"FileNameStaging": "Imprimir_Datos-2007-Q1"
 						}
 					}
 				],
