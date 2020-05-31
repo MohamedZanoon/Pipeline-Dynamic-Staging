@@ -3,9 +3,64 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Copy From Table Source Schema",
 				"type": "Copy",
 				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT cols.table_name, cols.column_name, cols.position, cons.status, cons.owner\nFROM all_constraints cons\nINNER JOIN all_cons_columns cols ON cons.constraint_name = cols.constraint_name AND\n                                    cons.owner = cols.owner\nWHERE cons.constraint_type = 'P'    \nORDER BY cols.table_name, cols.position;",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "TableSourceSchemaProduction",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Staging",
+						"type": "DatasetReference",
+						"parameters": {
+							"FileNameStaging": "TablePKs"
+						}
+					}
+				]
+			},
+			{
+				"name": "Copy From Table Source Schema To Destination",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy From Table Source Schema",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -35,7 +90,7 @@
 						"referenceName": "Staging",
 						"type": "DatasetReference",
 						"parameters": {
-							"FileNameStaging": "Imprimir_Datos-test"
+							"FileNameStaging": "TablePKs"
 						}
 					}
 				],
@@ -44,7 +99,7 @@
 						"referenceName": "DestinationProduction",
 						"type": "DatasetReference",
 						"parameters": {
-							"TableNameDestination": "Imprimir_Datos",
+							"TableNameDestination": "TablePKs",
 							"TableSchemaDestination": "dbo"
 						}
 					}
