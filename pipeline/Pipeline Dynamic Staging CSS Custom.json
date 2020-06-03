@@ -1146,7 +1146,10 @@
 												"storedProcedureParameters": {
 													"TableNameSource": {
 														"type": "String",
-														"value": "@item().TableNameSource"
+														"value": {
+															"value": "@item().TableNameSource",
+															"type": "Expression"
+														}
 													}
 												},
 												"queryTimeout": "02:00:00"
