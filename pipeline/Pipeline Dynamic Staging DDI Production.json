@@ -709,11 +709,11 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "SourceProduction",
+												"referenceName": "SourceDDIProduction",
 												"type": "DatasetReference",
 												"parameters": {
-													"TableNameSource": "@item().TableNameSource",
-													"TableSchemaSource": "@item().TableSchemaSource"
+													"TableNameSource": "item().TableNameSource",
+													"TableSchemaSource": "item().TableSchemaSource"
 												}
 											}
 										],
