@@ -245,7 +245,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "TableSourceSchemaProduction",
+												"referenceName": "TableSourceSchemaDDIProduction",
 												"type": "DatasetReference"
 											}
 										],
