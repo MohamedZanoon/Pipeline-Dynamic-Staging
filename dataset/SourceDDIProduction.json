@@ -1,0 +1,34 @@
+{
+	"name": "SourceDDIProduction",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DDI Production",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"TableNameSource": {
+				"type": "string"
+			},
+			"TableSchemaSource": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "01 - Sources"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().TableSchemaSource",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().TableNameSource",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
