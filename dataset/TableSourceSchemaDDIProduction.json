@@ -1,0 +1,16 @@
+{
+	"name": "TableSourceSchemaDDIProduction",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DDI Production",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "01 - Sources"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
