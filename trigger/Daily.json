@@ -9,6 +9,12 @@
 					"referenceName": "Pipeline Dynamic Staging CSS Production",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Pipeline Dynamic Staging DDI Production",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
