@@ -13515,6 +13515,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Pipeline Dynamic Staging DDI Production",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -13536,7 +13543,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Pipeline Dynamic Staging CSS Production')]"
+				"[concat(variables('factoryId'), '/pipelines/Pipeline Dynamic Staging CSS Production')]",
+				"[concat(variables('factoryId'), '/pipelines/Pipeline Dynamic Staging DDI Production')]"
 			]
 		},
 		{
