@@ -1,0 +1,16 @@
+{
+	"name": "SqlServertest",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=CAI-024\\MSSQLSERVER2017;initial catalog=Test;user id=mez",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhNTRjOWUyOC1iMWRjLTQ3N2UtOGFlNS00MDg4MDRlMTFjNzAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "demo-ewa-ir",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
