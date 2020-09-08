@@ -6,7 +6,7 @@
 		"type": "Oracle",
 		"typeProperties": {
 			"connectionString": "host=10.39.212.209;port=1521;sid=CSSPRO;user id=BI_MOHD",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5ZmI3MTE2Mi1mZDZiLTQ5ZTktYTZhZS00NTE0MzBlYjU4NzQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyNWU5N2IzYS04MzkwLTQwZmMtOGRjNC1lMGIxNjliZTZiNzkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "IGA-IR",
