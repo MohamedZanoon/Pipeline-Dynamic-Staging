@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "OracleSource",
+						"oracleReaderQuery": "SELECT * FROM CLIENTES",
 						"partitionOption": "None",
 						"queryTimeout": "02:00:00"
 					},
@@ -35,12 +36,8 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceProduction",
-						"type": "DatasetReference",
-						"parameters": {
-							"TableNameSource": "CLIENTES",
-							"TableSchemaSource": "INTFOPEN"
-						}
+						"referenceName": "TableSourceSchemaProduction",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
