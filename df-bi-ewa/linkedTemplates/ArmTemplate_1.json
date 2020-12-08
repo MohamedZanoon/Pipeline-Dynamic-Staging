@@ -384,7 +384,7 @@
 							"name": "Count"
 						}
 					],
-					"script": "source(output(\n\t\tUSUARIO as string,\n\t\tF_ACTUAL as string,\n\t\tPROGRAMA as string,\n\t\tCOD_CLI as string,\n\t\tAPE1_CLI as string,\n\t\tAPE2_CLI as string,\n\t\tNOM_CLI as string,\n\t\tTFNO_CLI as string,\n\t\tCOD_CALLE as string,\n\t\tNUM_PUERTA as string,\n\t\tDUPLICADOR as string,\n\t\tCGV_CLI as string,\n\t\tDOC_ID as string,\n\t\tTIP_DOC as string,\n\t\tCO_PAIS as string,\n\t\tTIP_CLI as string,\n\t\tF_ALTA as string,\n\t\tF_BAJA as string,\n\t\tNRH as string,\n\t\tNRH_FAV as string,\n\t\tNRH_PEN as string,\n\t\tFAX_CLI as string,\n\t\tPERS_CONTACTO as string,\n\t\tCO_COND_FISCAL as string,\n\t\tSOUNDEX_AP1 as string,\n\t\tSOUNDEX_AP2 as string,\n\t\tREF_DIR as string,\n\t\tCUALIF_CLI as string,\n\t\tNUM_DEV_CHEQ as string,\n\t\tCANT_LETRAS_IMPAGAS as string,\n\t\tNUM_FISCAL as string,\n\t\tAPE1_CLI_UP as string,\n\t\tDATOS as string,\n\t\tCOD_POST as string,\n\t\tNIF as string,\n\t\tTFNO2_CLI as string,\n\t\tDATOS2 as string,\n\t\tEST_CLI as string,\n\t\tSPEC_SIGNAL as string,\n\t\tAPE3_CLI as string,\n\t\tAPE1_CLI_ARAB as string,\n\t\tAPE2_CLI_ARAB as string,\n\t\tAPE3_CLI_ARAB as string,\n\t\tNOM_CLI_ARAB as string,\n\t\tAPE1_CLI_ARAB_UP as string,\n\t\tIND_CASH_ONLY as string,\n\t\tCOD_RATING as string,\n\t\tF_RATING as string,\n\t\tPASSPORT_NO as string,\n\t\tJOB_TITLE as string,\n\t\tNIF_WORK as string,\n\t\tF_BIRTH as string,\n\t\tTFNO3_CLI as string,\n\t\tEMAIL as string,\n\t\tOBSERVACIONES as string,\n\t\tPASSWORD as string,\n\t\tF_CASH_ONLY as string,\n\t\tEMAIL2 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Source\nSource aggregate(groupBy(PASSWORD),\n\tCount = count()) ~> Count\nCount sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CountImp'],\n\tpartitionBy('hash', 1)) ~> Destination"
+					"script": "source(output(\n\t\tUSUARIO as string,\n\t\tF_ACTUAL as string,\n\t\tPROGRAMA as string,\n\t\tCOD_CLI as string,\n\t\tAPE1_CLI as string,\n\t\tAPE2_CLI as string,\n\t\tNOM_CLI as string,\n\t\tTFNO_CLI as string,\n\t\tCOD_CALLE as string,\n\t\tNUM_PUERTA as string,\n\t\tDUPLICADOR as string,\n\t\tCGV_CLI as string,\n\t\tDOC_ID as string,\n\t\tTIP_DOC as string,\n\t\tCO_PAIS as string,\n\t\tTIP_CLI as string,\n\t\tF_ALTA as string,\n\t\tF_BAJA as string,\n\t\tNRH as string,\n\t\tNRH_FAV as string,\n\t\tNRH_PEN as string,\n\t\tFAX_CLI as string,\n\t\tPERS_CONTACTO as string,\n\t\tCO_COND_FISCAL as string,\n\t\tSOUNDEX_AP1 as string,\n\t\tSOUNDEX_AP2 as string,\n\t\tREF_DIR as string,\n\t\tCUALIF_CLI as string,\n\t\tNUM_DEV_CHEQ as string,\n\t\tCANT_LETRAS_IMPAGAS as string,\n\t\tNUM_FISCAL as string,\n\t\tAPE1_CLI_UP as string,\n\t\tDATOS as string,\n\t\tCOD_POST as string,\n\t\tNIF as string,\n\t\tTFNO2_CLI as string,\n\t\tDATOS2 as string,\n\t\tEST_CLI as string,\n\t\tSPEC_SIGNAL as string,\n\t\tAPE3_CLI as string,\n\t\tAPE1_CLI_ARAB as string,\n\t\tAPE2_CLI_ARAB as string,\n\t\tAPE3_CLI_ARAB as string,\n\t\tNOM_CLI_ARAB as string,\n\t\tAPE1_CLI_ARAB_UP as string,\n\t\tIND_CASH_ONLY as string,\n\t\tCOD_RATING as string,\n\t\tF_RATING as string,\n\t\tPASSPORT_NO as string,\n\t\tJOB_TITLE as string,\n\t\tNIF_WORK as string,\n\t\tF_BIRTH as string,\n\t\tTFNO3_CLI as string,\n\t\tEMAIL as string,\n\t\tOBSERVACIONES as string,\n\t\tPASSWORD as string,\n\t\tF_CASH_ONLY as string,\n\t\tEMAIL2 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Source\nSource aggregate(groupBy(PASSWORD),\n\tCount = count()) ~> Count\nCount sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CountImp'],\n\tpartitionBy('hash', 1)) ~> Destination"
 				}
 			},
 			"dependsOn": []
@@ -423,7 +423,8 @@
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
-							}
+							},
+							"traceLevel": "Fine"
 						}
 					}
 				],
@@ -541,7 +542,8 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database] = 'CSS'\nORDER BY [Order]",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"dataset": {
 								"referenceName": "SourceTablesProduction",
@@ -750,7 +752,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDateProduction",
@@ -1178,7 +1181,8 @@
 													}
 												}
 											},
-											"queryTimeout": "02:00:00"
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
 										},
 										"dataset": {
 											"referenceName": "IsDestinationTableExistsProduction",
@@ -1660,7 +1664,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDateProduction",
@@ -2028,7 +2033,8 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database] = 'CSS'\nORDER BY [Order]",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"dataset": {
 								"referenceName": "SourceTablesProduction",
@@ -2255,7 +2261,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDateProduction",
@@ -2683,7 +2690,8 @@
 													}
 												}
 											},
-											"queryTimeout": "02:00:00"
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
 										},
 										"dataset": {
 											"referenceName": "IsDestinationTableExistsProduction",
@@ -3183,7 +3191,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDateProduction",
@@ -3923,7 +3932,8 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nORDER BY [Order]",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"dataset": {
 								"referenceName": "SourceTables",
@@ -4138,7 +4148,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDate",
@@ -4566,7 +4577,8 @@
 													}
 												}
 											},
-											"queryTimeout": "02:00:00"
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
 										},
 										"dataset": {
 											"referenceName": "IsDestinationTableExists",
@@ -5054,7 +5066,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDate",
@@ -5417,7 +5430,8 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database]='CSS'\nORDER BY [Order]",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"dataset": {
 								"referenceName": "SourceTablesProduction",
@@ -5846,7 +5860,8 @@
 													}
 												}
 											},
-											"queryTimeout": "02:00:00"
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
 										},
 										"dataset": {
 											"referenceName": "IsDestinationTableExistsProduction",
@@ -6158,7 +6173,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDateProduction",
@@ -6369,7 +6385,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDateProduction",
@@ -6733,7 +6750,8 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database] = 'CSS'\nORDER BY [Order]",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"dataset": {
 								"referenceName": "SourceTables",
@@ -7168,7 +7186,8 @@
 													}
 												}
 											},
-											"queryTimeout": "02:00:00"
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
 										},
 										"dataset": {
 											"referenceName": "IsDestinationTableExists",
@@ -7486,7 +7505,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDate",
@@ -7697,7 +7717,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDate",
@@ -8057,7 +8078,8 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database]='DDI'\nORDER BY [Order]",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"dataset": {
 								"referenceName": "SourceTablesProduction",
@@ -8486,7 +8508,8 @@
 													}
 												}
 											},
-											"queryTimeout": "02:00:00"
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
 										},
 										"dataset": {
 											"referenceName": "IsDestinationTableExistsProduction",
@@ -8798,7 +8821,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDateProduction",
@@ -9009,7 +9033,8 @@
 																}
 															}
 														},
-														"queryTimeout": "02:00:00"
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
 													},
 													"dataset": {
 														"referenceName": "GetMaxDateProduction",
@@ -9373,7 +9398,8 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": "SELECT * \nFROM [vw_Configuration.SourceTables]\nWHERE [Database] = 'DDI'\nORDER BY [Order]",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"dataset": {
 								"referenceName": "SourceTables",
@@ -9808,7 +9834,8 @@
 													}
 												}
 											},
-											"queryTimeout": "02:00:00"
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
 										},
 										"dataset": {
 											"referenceName": "IsDestinationTableExists",
